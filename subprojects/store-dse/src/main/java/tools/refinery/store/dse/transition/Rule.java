@@ -51,6 +51,10 @@ public class Rule {
 		return action.bindToModel(model);
 	}
 
+	public BoundAction getOppositeAction(Model model) {
+		return action.getOppositeAction().bindToModel(model);
+	}
+
 	public boolean isDynamic() {
 		for (var actionLiteral : action.getActionLiterals()) {
 			if (actionLiteral.isDynamic()) {

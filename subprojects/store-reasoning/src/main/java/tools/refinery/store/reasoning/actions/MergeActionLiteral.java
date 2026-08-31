@@ -58,4 +58,12 @@ public class MergeActionLiteral<A extends AbstractValue<A, C>, C> extends Abstra
 		var refiner = model.getAdapter(ReasoningAdapter.class).getRefiner(partialSymbol);
 		return tuple -> refiner.merge(tuple, value) ? Tuple.of() : null;
 	}
+
+	@Override
+	public ActionLiteral getOppositeActionLiteral() {
+		if (value instanceof TruthValue truthValue) {
+			return new MergeActionLiteral(partialSymbol, truthValue.not(), parameters);
+		}
+		return super.getOppositeActionLiteral();
+	}
 }

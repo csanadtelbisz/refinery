@@ -31,7 +31,16 @@ public class ActivationStoreWorker {
 
 
 	public ActivationStore.VisitResult fireRandomActivation(VersionWithObjectiveValue thisVersion, Random random) {
-		var result = store.getRandomAndMarkAsVisited(thisVersion, random);
+		ActivationStore.VisitResult result;
+		boolean firingOppositeAction = thisVersion.getTransformation() != -1;
+		if (firingOppositeAction) {
+			result = new ActivationStore.VisitResult(
+					true, false, thisVersion.getTransformation(), thisVersion.getActivation()
+			);
+		} else {
+			result = store.getRandomAndMarkAsVisited(thisVersion, random);
+		}
+
 		if (result.successfulVisit()) {
 			int selectedTransformation = result.transformation();
 			int selectedActivation = result.activation();
@@ -39,8 +48,12 @@ public class ActivationStoreWorker {
 			Transformation transformation = transformations.get(selectedTransformation);
 			var tuple = transformation.getActivation(selectedActivation);
 
-			boolean success = transformation.fireActivation(tuple);
+			boolean success =
+					firingOppositeAction ?
+							transformation.fireOppositeActivation(tuple) :
+							transformation.fireActivation(tuple);
 			if (success) {
+				thisVersion.setFiredTransformation(selectedTransformation, selectedActivation);
 				return result;
 			} else {
 				return new ActivationStore.VisitResult(

@@ -173,7 +173,11 @@ public class BestFirstWorker {
 			throw new IllegalStateException("The model has uncommitted changes!");
 		}
 
+		boolean firingOppositeAction = this.last.getTransformation() != -1;
 		var visitResult = activationStoreWorker.fireRandomActivation(this.last, random);
+		if (firingOppositeAction) {
+			storeManager.getObjectiveStore().remove(this.last);
+		}
 
 		if (!visitResult.successfulVisit()) {
 			return new RandomVisitResult(null, visitResult.mayHaveMore());

@@ -6,8 +6,8 @@
 package tools.refinery.store.dse.transition.actions;
 
 import tools.refinery.logic.dnf.AnyQuery;
-import tools.refinery.store.model.Model;
 import tools.refinery.logic.term.NodeVariable;
+import tools.refinery.store.model.Model;
 
 import java.util.List;
 
@@ -24,5 +24,9 @@ public interface ActionLiteral {
 
 	default boolean isDynamic() {
 		return false;
+	}
+
+	default ActionLiteral getOppositeActionLiteral() {
+		return null;
 	}
 }

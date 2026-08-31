@@ -44,6 +44,10 @@ public class Action {
 	private void computeInputAllocation(int actionIndex, List<NodeVariable> parameters,
 										MutableObjectIntMap<NodeVariable> allocation) {
 		var actionLiteral = actionLiterals.get(actionIndex);
+		if (actionLiteral == null) {
+			return;
+		}
+
 		var inputVariables = actionLiteral.getInputVariables();
 		if (inputVariables.equals(parameters)) {
 			// Identity mappings use a {@code null} allocation to pass the activation tuple unchanged.
@@ -64,6 +68,10 @@ public class Action {
 	private void computeOutputAllocation(int actionIndex, Set<NodeVariable> mutableLocalVariable,
 										 MutableObjectIntMap<NodeVariable> allocation) {
 		var actionLiteral = actionLiterals.get(actionIndex);
+		if (actionLiteral == null) {
+			return;
+		}
+
 		var outputVariables = actionLiteral.getOutputVariables();
 		int size = outputVariables.size();
 		if (size == 0) {
@@ -128,5 +136,16 @@ public class Action {
 
 	public static Action ofPrecondition(RelationalQuery precondition, List<? extends ActionLiteral> actionLiterals) {
 		return ofSymbolicParameters(precondition.getDnf().getSymbolicParameters(), actionLiterals);
+	}
+
+	public Action getOppositeAction() {
+		if(actionLiterals.size() != 1) {
+			throw new UnsupportedOperationException("Only one action literal is supported for opposite actions.");
+		}
+
+		var oppositeActionLiteral = actionLiterals.getFirst().getOppositeActionLiteral();
+		var arrayList = new ArrayList<ActionLiteral>(1);
+		arrayList.add(oppositeActionLiteral);
+		return new Action(parameters, arrayList);
 	}
 }

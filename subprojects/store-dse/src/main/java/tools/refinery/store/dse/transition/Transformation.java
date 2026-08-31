@@ -18,6 +18,7 @@ public class Transformation {
 	private final DecisionRule decisionRule;
 	private final OrderedResultSet<Boolean> activations;
 	private final BoundAction action;
+	private final BoundAction oppositeAction;
 
 	public Transformation(Model model, PriorityAgenda agenda, DecisionRule decisionRule) {
 		this.decisionRule = decisionRule;
@@ -27,6 +28,7 @@ public class Transformation {
 		action = definition.createAction(model);
 		var resultSet = queryEngine.getResultSet(precondition);
 		activations = PriorityResultSet.of(resultSet, decisionRule.priority(), agenda);
+		oppositeAction = decisionRule.rule().getOppositeAction(model);
 	}
 
 	public DecisionRule getDefinition() {
@@ -43,5 +45,9 @@ public class Transformation {
 
 	public boolean fireActivation(Tuple activation) {
 		return action.fire(activation);
+	}
+
+	public boolean fireOppositeActivation(Tuple activation) {
+		return oppositeAction.fire(activation);
 	}
 }
