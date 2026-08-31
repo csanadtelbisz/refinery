@@ -6,7 +6,9 @@
 package tools.refinery.store.reasoning.actions;
 
 import tools.refinery.logic.AbstractValue;
+import tools.refinery.logic.term.truthvalue.TruthValue;
 import tools.refinery.store.dse.transition.actions.AbstractActionLiteral;
+import tools.refinery.store.dse.transition.actions.ActionLiteral;
 import tools.refinery.store.dse.transition.actions.BoundActionLiteral;
 import tools.refinery.store.model.Model;
 import tools.refinery.logic.term.NodeVariable;

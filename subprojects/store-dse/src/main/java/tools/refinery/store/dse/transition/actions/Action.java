@@ -24,7 +24,7 @@ public class Action {
 
 	public Action(List<NodeVariable> parameters, List<? extends ActionLiteral> actionLiterals) {
 		this.parameters = List.copyOf(parameters);
-		this.actionLiterals = List.copyOf(actionLiterals);
+		this.actionLiterals = new ArrayList<>(actionLiterals);
 		var allocation = ObjectIntMaps.mutable.<NodeVariable>empty();
 		int arity = parameters.size();
 		for (int i = 0; i < arity; i++) {
