@@ -14,11 +14,13 @@ import tools.refinery.store.query.resultset.PriorityResultSet;
 import tools.refinery.store.query.resultset.ResultSet;
 import tools.refinery.store.tuple.Tuple;
 
+import java.util.Optional;
+
 public class Transformation {
 	private final DecisionRule decisionRule;
 	private final OrderedResultSet<Boolean> activations;
 	private final BoundAction action;
-	private final BoundAction oppositeAction;
+	private final Optional<BoundAction> oppositeAction;
 
 	public Transformation(Model model, PriorityAgenda agenda, DecisionRule decisionRule) {
 		this.decisionRule = decisionRule;
@@ -47,7 +49,13 @@ public class Transformation {
 		return action.fire(activation);
 	}
 
+	public boolean hasOppositeAction() {
+		return oppositeAction.isPresent();
+	}
+
 	public boolean fireOppositeActivation(Tuple activation) {
-		return oppositeAction.fire(activation);
+		return oppositeAction
+				.orElseThrow(() -> new IllegalStateException("No opposite action available"))
+				.fire(activation);
 	}
 }

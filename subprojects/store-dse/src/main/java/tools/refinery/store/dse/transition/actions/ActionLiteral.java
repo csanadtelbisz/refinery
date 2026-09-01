@@ -10,6 +10,7 @@ import tools.refinery.logic.term.NodeVariable;
 import tools.refinery.store.model.Model;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ActionLiteral {
 	List<NodeVariable> getInputVariables();
@@ -26,7 +27,7 @@ public interface ActionLiteral {
 		return false;
 	}
 
-	default ActionLiteral getOppositeActionLiteral() {
-		return null;
+	default Optional<ActionLiteral> getOppositeActionLiteral() {
+		return Optional.empty();
 	}
 }

@@ -138,14 +138,14 @@ public class Action {
 		return ofSymbolicParameters(precondition.getDnf().getSymbolicParameters(), actionLiterals);
 	}
 
-	public Action getOppositeAction() {
+	public Optional<Action> getOppositeAction() {
 		if(actionLiterals.size() != 1) {
-			throw new UnsupportedOperationException("Only one action literal is supported for opposite actions.");
+			return Optional.empty();
 		}
 
-		var oppositeActionLiteral = actionLiterals.getFirst().getOppositeActionLiteral();
-		var arrayList = new ArrayList<ActionLiteral>(1);
-		arrayList.add(oppositeActionLiteral);
-		return new Action(parameters, arrayList);
+		return actionLiterals.getFirst()
+				.getOppositeActionLiteral()
+				.map(actionLiteral -> new Action(parameters, List.of(actionLiteral)));
+
 	}
 }

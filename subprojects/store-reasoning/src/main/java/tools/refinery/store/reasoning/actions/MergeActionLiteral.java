@@ -17,6 +17,7 @@ import tools.refinery.store.reasoning.representation.PartialSymbol;
 import tools.refinery.store.tuple.Tuple;
 
 import java.util.List;
+import java.util.Optional;
 
 public class MergeActionLiteral<A extends AbstractValue<A, C>, C> extends AbstractActionLiteral {
 	private final PartialSymbol<A, C> partialSymbol;
@@ -62,9 +63,9 @@ public class MergeActionLiteral<A extends AbstractValue<A, C>, C> extends Abstra
 	}
 
 	@Override
-	public ActionLiteral getOppositeActionLiteral() {
+	public Optional<ActionLiteral> getOppositeActionLiteral() {
 		if (value instanceof TruthValue truthValue) {
-			return new MergeActionLiteral(partialSymbol, truthValue.not(), parameters);
+			return Optional.of(new MergeActionLiteral(partialSymbol, truthValue.not(), parameters));
 		}
 		return super.getOppositeActionLiteral();
 	}

@@ -53,7 +53,9 @@ public class ActivationStoreWorker {
 							transformation.fireOppositeActivation(tuple) :
 							transformation.fireActivation(tuple);
 			if (success) {
-				thisVersion.setFiredTransformation(selectedTransformation, selectedActivation);
+				if (transformation.hasOppositeAction()) {
+					thisVersion.setFiredTransformation(selectedTransformation, selectedActivation);
+				}
 				return result;
 			} else {
 				return new ActivationStore.VisitResult(

@@ -14,6 +14,7 @@ import tools.refinery.store.model.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Rule {
 	private final String name;
@@ -51,8 +52,8 @@ public class Rule {
 		return action.bindToModel(model);
 	}
 
-	public BoundAction getOppositeAction(Model model) {
-		return action.getOppositeAction().bindToModel(model);
+	public Optional<BoundAction> getOppositeAction(Model model) {
+		return action.getOppositeAction().map(oppositeAction -> oppositeAction.bindToModel(model));
 	}
 
 	public boolean isDynamic() {
