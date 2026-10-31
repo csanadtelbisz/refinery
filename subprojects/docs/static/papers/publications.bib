@@ -1,34 +1,511 @@
-@article{jot2020,
-  author       = {Krist{\'{o}}f Marussy and
-                  Oszk{\'{a}}r Semer{\'{a}}th and
-                  Aren A. Babikian and
-                  D{\'{a}}niel Varr{\'{o}}},
-  title        = {A Specification Language for Consistent Model Generation based on
-                  Partial Models},
-  journal      = {J. Object Technol.},
-  volume       = {19},
-  number       = {3},
-  pages        = {3:1--22},
-  year         = {2020},
-  doi          = {10.5381/JOT.2020.19.3.A12},
-  url          = {https://doi.org/10.5381/JOT.2020.19.3.A12},
-  url_pdf      = {https://www.jot.fm/issues/issue_2020_03/article12.pdf}
-}
+% Editorial summaries belong in annote, not in the author abstract field.
+% Source and audit notes: PUBLICATION_SOURCES.md and TDK_SOURCES.md.
 
 @inproceedings{icse2024,
-  author       = {Krist{\'{o}}f Marussy and
-                  Attila Ficsor and
-                  Oszk{\'{a}}r Semer{\'{a}}th and
-                  D{\'{a}}niel Varr{\'{o}}},
-  title        = {Refinery: Graph Solver as a Service: Refinement-based Generation and
-                  Analysis of Consistent Models},
-  booktitle    = {Proceedings of the 2024 {IEEE/ACM} 46th International Conference on
-                  Software Engineering: Companion Proceedings, {ICSE} Companion 2024,
-                  Lisbon, Portugal, April 14-20, 2024},
-  pages        = {64--68},
-  publisher    = {{ACM}},
-  year         = {2024},
-  doi          = {10.1145/3639478.3640045},
-  url          = {https://doi.org/10.1145/3639478.3640045},
-  url_pdf      = {/papers/icse24-demo.pdf}
+  author         = {Marussy, Kristóf and Ficsor, Attila and Semeráth, Oszkár and Varró, Dániel},
+  title          = {{Refinery: Graph Solver as a Service: Refinement-based Generation and Analysis of Consistent Models}},
+  booktitle      = {Proceedings of the 2024 IEEE/ACM 46th International Conference on Software Engineering: Companion Proceedings},
+  year           = {2024},
+  pages          = {64--68},
+  doi            = {10.1145/3639478.3640045},
+  url            = {https://doi.org/10.1145/3639478.3640045},
+  annote         = {Editorial summary: Refinery exposes graph reasoning and model synthesis through an interactive web environment and service interfaces. Its partial-model language supports incomplete and contradictory information while refining specifications into consistent graphs.},
+  language       = {english},
+  publisher      = {ACM},
+  url_pdf        = {/papers/icse24-demo.pdf},
+  url_video      = {https://youtu.be/Qy_3udNsWsM}
+}
+
+@article{jot2020,
+  author         = {Marussy, Kristóf and Semeráth, Oszkár and Babikian, Aren A. and Varró, Dániel},
+  title          = {{A Specification Language for Consistent Model Generation based on Partial Models}},
+  journal        = {Journal of Object Technology},
+  year           = {2020},
+  pages          = {3:1--22},
+  doi            = {10.5381/jot.2020.19.3.a12},
+  url            = {https://doi.org/10.5381/jot.2020.19.3.a12},
+  annote         = {Editorial summary: A formal specification language represents unfinished graph models, constraints, and quantitative objectives. Its semantics gives a common basis for checking consistency, evaluating queries, and guiding model synthesis.},
+  language       = {english},
+  volume         = {19},
+  number         = {3},
+  issn           = {1660-1769},
+  url_pdf        = {https://www.jot.fm/issues/issue_2020_03/article12.pdf},
+  url_video      = {https://www.youtube.com/watch?v=ggTbv_s5t2A}
+}
+
+@inproceedings{semerathNagyVarro2018,
+  author         = {Semeráth, Oszkár and Nagy, András Szabolcs and Varró, Dániel},
+  title          = {{A graph solver for the automated generation of consistent domain-specific models}},
+  booktitle      = {Proceedings of the 40th International Conference on Software Engineering},
+  year           = {2018},
+  pages          = {969--980},
+  doi            = {10.1145/3180155.3180186},
+  url            = {https://doi.org/10.1145/3180155.3180186},
+  annote         = {Editorial summary: A dedicated solver constructs domain models by refining partial graphs and incrementally checking graph constraints. The approach combines logical consistency guarantees with scalable generation for testing modeling tools.},
+  language       = {english},
+  publisher      = {ACM},
+  url_pdf        = {https://dl.acm.org/doi/pdf/10.1145/3180155.3180186}
+}
+
+@article{marussyMultiplicity2022,
+  author         = {Marussy, Kristóf and Semeráth, Oszkár and Varró, Dániel},
+  title          = {{Automated Generation of Consistent Graph Models With Multiplicity Reasoning}},
+  journal        = {IEEE Transactions on Software Engineering},
+  year           = {2022},
+  pages          = {1610--1629},
+  doi            = {10.1109/TSE.2020.3025732},
+  url            = {https://doi.org/10.1109/TSE.2020.3025732},
+  annote         = {Editorial summary: Partial graph models are extended with counters and type scopes so that generation can control object counts and reason about multiplicities before construction finishes. Graph queries and numerical reasoning jointly prune inconsistent candidates.},
+  language       = {english},
+  volume         = {48},
+  number         = {5},
+  publisher      = {IEEE},
+  issn           = {0098-5589},
+  url_pdf        = {https://marussy.com/papers/tse22.pdf}
+}
+
+@article{babikianQualitative2022,
+  author         = {Babikian, Aren A. and Semeráth, Oszkár and Li, Anqi and Marussy, Kristóf and Varró, Dániel},
+  title          = {{Automated generation of consistent models using qualitative abstractions and exploration strategies}},
+  journal        = {Software and Systems Modeling},
+  year           = {2022},
+  pages          = {1763--1787},
+  doi            = {10.1007/s10270-021-00918-6},
+  url            = {https://doi.org/10.1007/s10270-021-00918-6},
+  annote         = {Editorial summary: Graph reasoning is combined with numerical solving to synthesize models satisfying structural and attribute constraints. Qualitative abstractions and exploration strategies support traffic-scenario generation with geometric requirements.},
+  language       = {english},
+  volume         = {21},
+  number         = {5},
+  publisher      = {Springer},
+  issn           = {1619-1366},
+  url_pdf        = {https://link.springer.com/content/pdf/10.1007/s10270-021-00918-6.pdf}
+}
+
+@article{semerathDiversity2020,
+  author         = {Semeráth, Oszkár and Farkas, Rebeka and Bergmann, Gábor and Varró, Dániel},
+  title          = {{Diversity of graph models and graph generators in mutation testing}},
+  journal        = {International Journal on Software Tools for Technology Transfer},
+  year           = {2020},
+  pages          = {57--78},
+  doi            = {10.1007/s10009-019-00530-6},
+  url            = {https://doi.org/10.1007/s10009-019-00530-6},
+  annote         = {Editorial summary: Neighborhood abstractions measure structural differences between generated graphs. Mutation-testing experiments investigate how graph diversity affects the ability of test suites to detect errors in domain specifications.},
+  language       = {english},
+  volume         = {22},
+  number         = {1},
+  publisher      = {Springer},
+  issn           = {1433-2779},
+  url_pdf        = {https://link.springer.com/content/pdf/10.1007/s10009-019-00530-6.pdf}
+}
+
+@article{semerathRealistic2021,
+  author         = {Semeráth, Oszkár and Babikian, Aren A. and Chen, Boqi and Li, Chuning and Marussy, Kristóf and Szárnyas, Gábor and Varró, Dániel},
+  title          = {{Automated generation of consistent, diverse and structurally realistic graph models}},
+  journal        = {Software and Systems Modeling},
+  year           = {2021},
+  pages          = {1713--1734},
+  doi            = {10.1007/s10270-021-00884-z},
+  url            = {https://doi.org/10.1007/s10270-021-00884-z},
+  annote         = {Editorial summary: A graph-generation technique combines domain constraints, neighborhood diversity, and similarity to representative real models. Graph metrics guide synthesis toward realistic structures without sacrificing consistency.},
+  language       = {english},
+  volume         = {20},
+  number         = {5},
+  publisher      = {Springer},
+  issn           = {1619-1366},
+  url_pdf        = {https://link.springer.com/content/pdf/10.1007/s10270-021-00884-z.pdf}
+}
+
+@inproceedings{varroGraphGeneration2018,
+  author         = {Varró, Dániel and Semeráth, Oszkár and Szárnyas, Gábor and Horváth, Ákos},
+  title          = {{Towards the Automated Generation of Consistent, Diverse, Scalable and Realistic Graph Models}},
+  booktitle      = {Graph Transformation, Specifications, and Nets},
+  year           = {2018},
+  pages          = {285--312},
+  doi            = {10.1007/978-3-319-75396-6_16},
+  url            = {https://doi.org/10.1007/978-3-319-75396-6_16},
+  annote         = {Editorial summary: This chapter develops foundations and correctness arguments for graph-model synthesis. It relates consistency, structural diversity, scalability, and realism to the requirements of automated testing and benchmarking.},
+  language       = {english},
+  publisher      = {Springer},
+  series         = {Lecture Notes in Computer Science},
+  volume         = {10800},
+  url_pdf        = {https://inf.mit.bme.hu/sites/default/files/publications/fmhe-model-generation.pdf}
+}
+
+@article{burWitness2021,
+  author         = {Búr, Márton and Marussy, Kristóf and Meyer, Brett H. and Varró, Dániel},
+  title          = {{Worst-case Execution Time Calculation for Query-based Monitors by Witness Generation}},
+  journal        = {ACM Transactions on Embedded Computing Systems},
+  year           = {2021},
+  pages          = {107:1--107:36},
+  doi            = {10.1145/3471904},
+  url            = {https://doi.org/10.1145/3471904},
+  annote         = {Editorial summary: Runtime-monitor timing is bounded by constructing graph witnesses that maximize execution cost while respecting domain constraints. The method connects query semantics, partial models, and numerical optimization for embedded monitoring.},
+  language       = {english},
+  volume         = {20},
+  number         = {6},
+  publisher      = {ACM},
+  issn           = {1539-9087},
+  eprint         = {2102.03116},
+  archiveprefix  = {arXiv},
+  url_pdf        = {https://arxiv.org/pdf/2102.03116}
+}
+
+@inproceedings{foldiakPerformability2022,
+  author         = {Földiák, Máté and Marussy, Kristóf and Varró, Dániel and Majzik, István},
+  title          = {{System architecture synthesis for performability by logic solvers}},
+  booktitle      = {Proceedings of the ACM/IEEE 25th International Conference on Model Driven Engineering Languages and Systems},
+  year           = {2022},
+  pages          = {43--54},
+  doi            = {10.1145/3550355.3552448},
+  url            = {https://doi.org/10.1145/3550355.3552448},
+  annote         = {Editorial summary: Architecture synthesis combines logical constraints with quantitative evaluation of performance and dependability. Evaluating unfinished candidates guides exploration and supports finding suitable architectures with formal guarantees.},
+  language       = {english},
+  publisher      = {ACM},
+  isbn           = {978-1-4503-9466-6},
+  url_pdf        = {https://marussy.com/papers/models22.pdf},
+  url_artifact   = {https://doi.org/10.5281/zenodo.6889007}
+}
+
+@inproceedings{chenSceneGraphs2022,
+  author         = {Chen, Boqi and Marussy, Kristóf and Pilarski, Sebastian and Semeráth, Oszkár and Varró, Dániel},
+  title          = {{Consistent Scene Graph Generation by Constraint Optimization}},
+  booktitle      = {Proceedings of the 37th IEEE/ACM International Conference on Automated Software Engineering},
+  year           = {2022},
+  pages          = {25:1--25:13},
+  doi            = {10.1145/3551349.3560433},
+  url            = {https://doi.org/10.1145/3551349.3560433},
+  annote         = {Editorial summary: Scene-graph predictions from visual input are reconciled with domain constraints through optimization. Logical reasoning helps produce coherent object relationships instead of independently accepting inconsistent predictions.},
+  language       = {english},
+  publisher      = {ACM},
+  url_pdf        = {https://marussy.com/papers/ase22.pdf}
+}
+
+@inproceedings{chenGameMaps2020,
+  author         = {Chen, Boqi and Havelock, Dylan and Plante, Connor and Sukkarieh, Michael and Semeráth, Oszkár and Varró, Dániel},
+  title          = {{Automated video game world map synthesis by model-based techniques}},
+  booktitle      = {Proceedings of the 23rd ACM/IEEE International Conference on Model Driven Engineering Languages and Systems: Companion Proceedings},
+  year           = {2020},
+  pages          = {4:1--4:5},
+  doi            = {10.1145/3417990.3422001},
+  url            = {https://doi.org/10.1145/3417990.3422001},
+  annote         = {Editorial summary: A model-based tool generates game-world maps from structural specifications. Graph constraints encode map-design requirements so that generated worlds can satisfy consistency conditions while varying their structure.},
+  language       = {english},
+  publisher      = {ACM}
+}
+
+@inproceedings{semerathAttributes2020,
+  author         = {Semeráth, Oszkár and Babikian, Aren A. and Li, Anqi and Marussy, Kristóf and Varró, Dániel},
+  title          = {{Automated generation of consistent models with structural and attribute constraints}},
+  booktitle      = {Proceedings of the ACM/IEEE 23th International Conference on Model Driven Engineering Languages and Systems},
+  year           = {2020},
+  pages          = {187--199},
+  doi            = {10.1145/3365438.3410962},
+  url            = {https://doi.org/10.1145/3365438.3410962},
+  annote         = {Editorial summary: The approach coordinates a structural graph solver with attribute reasoning. Qualitative representations connect graph relationships to numerical constraints, enabling generation tasks such as physically meaningful traffic scenes.},
+  language       = {english},
+  publisher      = {ACM},
+  url_artifact   = {https://dblp.org/rec/data/10/SemerathBLMV20}
+}
+
+@inproceedings{babikianTheoremProvers2020,
+  author         = {Babikian, Aren A. and Semeráth, Oszkár and Varró, Dániel},
+  title          = {{Automated Generation of Consistent Graph Models with First-Order Logic Theorem Provers}},
+  booktitle      = {Fundamental Approaches to Software Engineering},
+  year           = {2020},
+  pages          = {441--461},
+  doi            = {10.1007/978-3-030-45234-6_22},
+  url            = {https://doi.org/10.1007/978-3-030-45234-6_22},
+  annote         = {Editorial summary: First-order theorem proving is used as a backend for constructing consistent domain-specific graph models. The work investigates logical encodings and solver behavior for satisfying metamodels and well-formedness requirements.},
+  language       = {english},
+  publisher      = {Springer},
+  series         = {Lecture Notes in Computer Science},
+  volume         = {12076}
+}
+
+@inproceedings{semerathViatraSolver2019,
+  author         = {Semeráth, Oszkár and Babikian, Aren A. and Pilarski, Sebastian and Varró, Dániel},
+  title          = {{VIATRA Solver: A Framework for the Automated Generation of Consistent Domain-Specific Models}},
+  booktitle      = {2019 IEEE/ACM 41st International Conference on Software Engineering: Companion Proceedings},
+  year           = {2019},
+  pages          = {43--46},
+  doi            = {10.1109/ICSE-Companion.2019.00034},
+  url            = {https://doi.org/10.1109/ICSE-Companion.2019.00034},
+  annote         = {Editorial summary: The VIATRA Solver tool synthesizes sets of structurally different models from metamodels and graph constraints. It supplies valid test inputs for modeling tools and forms the predecessor of Refinery.},
+  language       = {english},
+  publisher      = {IEEE},
+  url_pdf        = {https://inf.mit.bme.hu/sites/default/files/publications/ICSE19Demo-VS.pdf}
+}
+
+@inproceedings{marussyViews2018,
+  author         = {Marussy, Kristóf and Semeráth, Oszkár and Varró, Dániel},
+  title          = {{Incremental View Model Synchronization Using Partial Models}},
+  booktitle      = {Proceedings of the 21st ACM/IEEE International Conference on Model Driven Engineering Languages and Systems},
+  year           = {2018},
+  pages          = {323--333},
+  doi            = {10.1145/3239372.3239412},
+  url            = {https://doi.org/10.1145/3239372.3239412},
+  annote         = {Editorial summary: Partial models represent incomplete or conflicting information during view synchronization. Incremental transformations maintain useful view information while source models are being edited and consistency is temporarily unavailable.},
+  language       = {english},
+  publisher      = {ACM}
+}
+
+@inproceedings{semerathDiverse2018,
+  author         = {Semeráth, Oszkár and Varró, Dániel},
+  title          = {{Iterative Generation of Diverse Models for Testing Specifications of DSL Tools}},
+  booktitle      = {Fundamental Approaches to Software Engineering},
+  year           = {2018},
+  pages          = {227--245},
+  doi            = {10.1007/978-3-319-89363-1_13},
+  url            = {https://doi.org/10.1007/978-3-319-89363-1_13},
+  annote         = {Editorial summary: Neighborhood shapes partition graph models into structural equivalence classes. An iterative generator selects representatives from different classes and evaluates the resulting test diversity through mutation testing.},
+  language       = {english},
+  publisher      = {Springer},
+  series         = {Lecture Notes in Computer Science},
+  volume         = {10802}
+}
+
+@inproceedings{semerathConstraintRewriting2017,
+  author         = {Semeráth, Oszkár and Varró, Dániel},
+  title          = {{Graph Constraint Evaluation over Partial Models by Constraint Rewriting}},
+  booktitle      = {Theory and Practice of Model Transformation},
+  year           = {2017},
+  pages          = {138--154},
+  doi            = {10.1007/978-3-319-61473-1_10},
+  url            = {https://doi.org/10.1007/978-3-319-61473-1_10},
+  annote         = {Editorial summary: Constraint rewriting enables ordinary graph-pattern engines to reason over incomplete models. May and must interpretations distinguish potential violations from violations that every completion will exhibit.},
+  language       = {english},
+  publisher      = {Springer},
+  series         = {Lecture Notes in Computer Science},
+  volume         = {10374}
+}
+
+@article{semerathIncomplete2017,
+  author         = {Semeráth, Oszkár and Varró, Dániel},
+  title          = {{Evaluating Well-Formedness Constraints on Incomplete Models}},
+  journal        = {Acta Cybernetica},
+  year           = {2017},
+  pages          = {687--713},
+  doi            = {10.14232/actacyb.23.2.2017.15},
+  url            = {https://doi.org/10.14232/actacyb.23.2.2017.15},
+  annote         = {Editorial summary: Well-formedness checks are extended to incomplete models using possible and necessary satisfaction. The method separates uncertainty from definite design errors and supports validation before all modeling decisions are fixed.},
+  language       = {english},
+  volume         = {23},
+  number         = {2}
+}
+
+@inproceedings{semerathIncremental2016,
+  author         = {Semeráth, Oszkár and Vörös, András and Varró, Dániel},
+  title          = {{Iterative and Incremental Model Generation by Logic Solvers}},
+  booktitle      = {Fundamental Approaches to Software Engineering},
+  year           = {2016},
+  pages          = {87--103},
+  doi            = {10.1007/978-3-662-49665-7_6},
+  url            = {https://doi.org/10.1007/978-3-662-49665-7_6},
+  annote         = {Editorial summary: Repeated solver calls grow and modify valid instance models incrementally. Reusing parts of previous solutions addresses the cost of synthesizing large models satisfying complex domain specifications.},
+  language       = {english},
+  publisher      = {Springer},
+  series         = {Lecture Notes in Computer Science},
+  volume         = {9633}
+}
+
+@inproceedings{majzikCoverage2019,
+  author         = {Majzik, István and Semeráth, Oszkár and Hajdu, Csaba and Marussy, Kristóf and Szatmári, Zoltán and Micskei, Zoltán and Vörös, András and Babikian, Aren A. and Varró, Dániel},
+  title          = {{Towards System-Level Testing with Coverage Guarantees for Autonomous Vehicles}},
+  booktitle      = {2019 ACM/IEEE 22nd International Conference on Model Driven Engineering Languages and Systems},
+  year           = {2019},
+  pages          = {89--94},
+  doi            = {10.1109/MODELS.2019.00-12},
+  url            = {https://doi.org/10.1109/MODELS.2019.00-12},
+  annote         = {Editorial summary: A system-level testing vision combines runtime monitoring, qualitative traffic abstractions, coverage measurement, and consistent graph synthesis. New abstract situations are generated to cover behavior missing from existing tests.},
+  language       = {english},
+  publisher      = {IEEE},
+  url_pdf        = {https://inf.mit.bme.hu/sites/default/files/publications/models2019-AutonomousVechiclesTestingVision.pdf}
+}
+
+@inproceedings{alGburiLedger2024,
+  author         = {Al-Gburi, Noor and Földvári, András and Marussy, Kristóf and Semeráth, Oszkár and Kocsis, Imre},
+  title          = {{Requirement-Driven Generation of Distributed Ledger Architectures}},
+  booktitle      = {Proceedings of the ACM/IEEE 27th International Conference on Model Driven Engineering Languages and Systems},
+  year           = {2024},
+  pages          = {268--279},
+  doi            = {10.1145/3640310.3674097},
+  url            = {https://doi.org/10.1145/3640310.3674097},
+  annote         = {Editorial summary: Distributed-ledger requirements are mapped to architectural constraints. Refinery synthesizes candidate network architectures, helping explore configurations that meet application and infrastructure requirements.},
+  language       = {english},
+  publisher      = {ACM},
+  isbn           = {979-8-4007-0504-5},
+  url_pdf        = {https://marussy.com/papers/models24.pdf}
+}
+
+@inproceedings{lopezText2VQL2024,
+  author         = {Hernández López, José Antonio and Földiák, Máté and Varró, Dániel},
+  title          = {{Text2VQL: Teaching a Model Query Language to Open-Source Language Models with ChatGPT}},
+  booktitle      = {Proceedings of the ACM/IEEE 27th International Conference on Model Driven Engineering Languages and Systems},
+  year           = {2024},
+  pages          = {13--24},
+  doi            = {10.1145/3640310.3674091},
+  url            = {https://doi.org/10.1145/3640310.3674091},
+  annote         = {Editorial summary: Synthetic query-description pairs are used to specialize open language models for VIATRA query generation. Generated queries are checked syntactically and evaluated semantically using generated graph models.},
+  language       = {english},
+  publisher      = {ACM},
+  isbn           = {979-8-4007-0504-5},
+  url_artifact   = {https://doi.org/10.5281/zenodo.12516752}
+}
+
+@inproceedings{kargenCOLREGS2024,
+  author         = {Kargén, Ulf and Varró, Dániel},
+  title          = {{Towards Automated Test Scenario Generation for Assuring COLREGs Compliance of Autonomous Surface Vehicles}},
+  booktitle      = {Proceedings of the ACM/IEEE 27th International Conference on Model Driven Engineering Languages and Systems},
+  year           = {2024},
+  pages          = {249--256},
+  doi            = {10.1145/3640310.3674098},
+  url            = {https://doi.org/10.1145/3640310.3674098},
+  annote         = {Editorial summary: Partial modeling formalizes maritime encounter rules and supports generation of distinct test situations. The approach aims to expose inconsistencies and improve assurance of autonomous vessels against collision-avoidance regulations.},
+  language       = {english},
+  publisher      = {ACM},
+  isbn           = {979-8-4007-0504-5}
+}
+
+@article{babikianConcretization2024,
+  author         = {Babikian, Aren A. and Semeráth, Oszkár and Varró, Dániel},
+  title          = {{Concretization of Abstract Traffic Scene Specifications Using Metaheuristic Search}},
+  journal        = {IEEE Transactions on Software Engineering},
+  year           = {2024},
+  pages          = {48--68},
+  doi            = {10.1109/TSE.2023.3331254},
+  url            = {https://doi.org/10.1109/TSE.2023.3331254},
+  annote         = {Editorial summary: Abstract traffic-scene relationships are translated into numerical placements on realistic roads. Metaheuristic search finds concrete initial states satisfying the scene constraints for simulation-based autonomous-driving tests.},
+  language       = {english},
+  volume         = {50},
+  number         = {1},
+  publisher      = {IEEE},
+  issn           = {0098-5589},
+  url_pdf        = {https://arxiv.org/pdf/2307.07826},
+  eprint         = {2307.07826},
+  archiveprefix  = {arXiv},
+  url_artifact   = {https://doi.org/10.5281/zenodo.10667878}
+}
+
+@article{babikianJunctions2026,
+  author         = {Babikian, Aren A. and Ficsor, Attila and Semeráth, Oszkár and Mussbacher, Gunter and Varró, Dániel},
+  title          = {{Automated and logically exhaustive generation of traffic scenarios at road junctions using a multi-level danger definition}},
+  journal        = {Software and Systems Modeling},
+  year           = {2026},
+  doi            = {10.1007/s10270-026-01372-y},
+  url            = {https://doi.org/10.1007/s10270-026-01372-y},
+  annote         = {Editorial summary: Potentially dangerous junction interactions are classified by overlapping actor maneuvers. Logical scenarios are enumerated exhaustively, then converted into concrete paths and timing choices for executing collision-relevant tests.},
+  language       = {english},
+  publisher      = {Springer},
+  issn           = {1619-1366},
+  date           = {2026-05-21},
+  url_preprint   = {https://arxiv.org/abs/2410.07079},
+  note           = {Published online on 21 May 2026}
+}
+
+@article{foldiakProbabilistic2026,
+  author         = {Földiák, Máté and Marussy, Kristóf and Varró, Dániel},
+  title          = {{Model-based stochastic analysis with probabilistic graph query evaluation}},
+  journal        = {Software and Systems Modeling},
+  year           = {2026},
+  pages          = {1719--1746},
+  doi            = {10.1007/s10270-025-01331-z},
+  url            = {https://doi.org/10.1007/s10270-025-01331-z},
+  annote         = {Editorial summary: Probabilistic graph queries express dependability measures directly over architecture models. Combining graph matching with decision-diagram analysis avoids repeatedly constructing separate stochastic analysis models during architecture exploration.},
+  language       = {english},
+  volume         = {25},
+  number         = {5},
+  publisher      = {Springer},
+  issn           = {1619-1366},
+  url_pdf        = {https://link.springer.com/content/pdf/10.1007/s10270-025-01331-z.pdf}
+}
+
+@inproceedings{tothSysML2026,
+  author         = {Tóth, Ádám László and Bajczi, Levente and Zavada, Ármin and Vörös, András and Molnár, Vince},
+  title          = {{Skyscrapers Need Solid Foundations: Pattern-Based Validation of SysML v2 Models with Refinery}},
+  booktitle      = {Proceedings of the ACM/IEEE 29th International Conference on Model Driven Engineering Languages and Systems},
+  year           = {2026},
+  pages          = {47--57},
+  doi            = {10.1145/3822455.3830322},
+  url            = {https://doi.org/10.1145/3822455.3830322},
+  annote         = {Editorial summary: A validation pipeline converts SysML v2 models into a representation processed by Refinery. Custom patterns check semantic pitfalls and engineering rules beyond the language specification, including models produced with language-model assistance.},
+  language       = {english},
+  publisher      = {ACM},
+  url_artifact   = {https://zenodo.org/records/19291629}
+}
+
+@inproceedings{freyAssurance2026,
+  author         = {Frey, Dominik and Kargén, Ulf and Varró, Dániel},
+  title          = {{Automated Generation of Functionally Complete Assurance Suites for COLREGS-Compliance of Autonomous Surface Vehicles}},
+  booktitle      = {Proceedings of the ACM/IEEE 29th International Conference on Model Driven Engineering Languages and Systems},
+  year           = {2026},
+  pages          = {293--304},
+  doi            = {10.1145/3822455.3830315},
+  url            = {https://doi.org/10.1145/3822455.3830315},
+  annote         = {Editorial summary: Graph solving enumerates semantically distinct maritime encounters, then geometric constraints concretize them into initial scenes. This refinement process constructs assurance suites covering all functional encounter classes for the studied vessel counts.},
+  language       = {english},
+  publisher      = {ACM},
+  url_metadata   = {https://dominikfrey.dev/a/models-2026-functionally-complete-assurance-suites}
+}
+
+@inproceedings{freySceneGEMS2026,
+  author         = {Frey, Dominik and Kargén, Ulf and Varró, Dániel},
+  title          = {{SceneGEMS: Scenario Generation and Execution Framework for the Safety Assurance of Maritime Autonomous Surface Vehicles}},
+  booktitle      = {Proceedings of the ACM/IEEE 29th International Conference on Model Driven Engineering Languages and Systems: Companion Proceedings},
+  year           = {2026},
+  pages          = {219--223},
+  doi            = {10.1145/3837062.3838872},
+  url            = {https://doi.org/10.1145/3837062.3838872},
+  annote         = {Editorial summary: SceneGEMS integrates model-based maritime scenario generation, simulation, runtime monitoring, and interactive exploration. The framework produces assurance evidence for collision-regulation compliance and supports simulated or hybrid vessel setups.},
+  language       = {english},
+  publisher      = {ACM},
+  url_pdf        = {https://dominikfrey.dev/files/papers/models-2026-scenegems-tool-paper.pdf},
+  url_code       = {https://github.com/PELAB-LiU/SceneGEMS},
+  url_video      = {https://www.youtube.com/watch?v=8S7yY4I_81M}
+}
+
+@article{freyCOLREGSEvaluation2025,
+  author         = {Frey, Dominik and Kargén, Ulf and Varró, Dániel},
+  title          = {{Assessing Scene Generation Techniques for Testing COLREGS-Compliance of Autonomous Surface Vehicles}},
+  journal        = {Proceedings of the ACM on Software Engineering},
+  year           = {2025},
+  pages          = {985--1008},
+  doi            = {10.1145/3728919},
+  url            = {https://doi.org/10.1145/3728919},
+  annote         = {Editorial summary: An empirical study compares stochastic and data-driven generators for maritime encounter scenes. Semantic diversity, completeness, scalability, and efficiency reveal limitations when techniques are transferred from road traffic to multi-vessel situations.},
+  language       = {english},
+  volume         = {2},
+  number         = {ISSTA},
+  publisher      = {ACM},
+  url_pdf        = {https://liu.diva-portal.org/smash/get/diva2:2007010/FULLTEXT02.pdf}
+}
+
+@inproceedings{akelDataSpaces2026,
+  author         = {Akel, Nada and Semeráth, Oszkár and Kocsis, Imre and Gönczy, László},
+  title          = {{Synthetic Data Generation for Trustworthy Data Space Services}},
+  booktitle      = {Proceedings of the 41st ACM/SIGAPP Symposium on Applied Computing},
+  year           = {2026},
+  pages          = {598--605},
+  doi            = {10.1145/3748522.3779965},
+  url            = {https://doi.org/10.1145/3748522.3779965},
+  annote         = {Editorial summary: Constraint-compliant and varied synthetic data are generated to test transformations in shared data ecosystems. An xAPI case study evaluates the approach using mutation testing.},
+  language       = {english},
+  publisher      = {ACM},
+  url_metadata   = {https://m2.mtmt.hu/gui2/?mode=browse&params=publication%3B37333466}
+}
+
+@inproceedings{akelDataQuality2025,
+  author         = {Akel, Nada and Gönczy, László},
+  title          = {{Model-Driven Method for Data Quality Assurance}},
+  booktitle      = {Proceedings of the 32nd Minisymposium},
+  year           = {2025},
+  pages          = {51--54},
+  doi            = {10.3311/MINISY2025-010},
+  url            = {https://doi.org/10.3311/MINISY2025-010},
+  annote         = {Editorial summary: The paper explicitly applies Refinery to checking data-quality constraints and validating xAPI event traces. Its graph-generation capabilities also produce consistent and deliberately invalid test instances.},
+  language       = {english},
+  publisher      = {Budapest University of Technology and Economics, Department of Artificial Intelligence and Systems Engineering},
+  editor         = {Renczes, Balázs},
+  keywords       = {Data Quality, Event Traces, Experience API, Refinery},
+  url_pdf        = {https://repozitorium.omikk.bme.hu/bitstreams/3720cd9a-899e-437c-8642-cc7bf84fdf3d/download},
+  url_metadata   = {https://m2.mtmt.hu/gui2/?mode=browse&params=publication%3B36133680}
 }

@@ -10,3 +10,68 @@
                 Calculating successor states in software model checking is costly, often requiring solving a Satisfiability Modulo Theories (SMT) problem. However, in many cases, the evaluation of a program statement does not affect the verified property. Successor state calculation can be simplified in such cases. Existing algorithms, such as the cone-of-influence reduction, statically analyze the program and eliminate irrelevant variables. In concurrent software, however, the result of a statement may be used in one interleaving of threads while unused in another. Algorithms that statically analyze the program cannot simplify such statements. My on-the-fly approach detects whether a statement can be simplified during the state space exploration based on the current state of each thread.
                 Promising model checking approaches have been developed that encode the whole concurrent program and the verified property as an SMT problem, leaving the reasoning to the strength of SMT solvers. These methods for concurrent software verification ensure that events (variable accesses) of concurrent threads are consistently ordered. Inconsistencies in the form of cyclic precedence of concurrent events are detected and excluded. While SMT solvers are highly optimized, they remain general-purpose tools, leaving room for domain-specific optimization. I propose a domain-specific optimization to find scheduling inconsistencies and strengthen the encoding formula before starting the SMT-solving procedure. This way, the solver search space can be greatly reduced, and the overall verification performance can be significantly improved.}
 }
+
+% Editorial summaries belong in annote, not in the author abstract field.
+% Source and audit notes: PUBLICATION_SOURCES.md and TDK_SOURCES.md.
+
+@misc{semerathPhd2019,
+  author         = {Semeráth, Oszkár},
+  title          = {{Formal Validation and Model Generation for Domain-Specific Languages by Logic Solvers}},
+  year           = {2019},
+  type           = {Thesis},
+  institution    = {Budapest University of Technology and Economics},
+  school         = {Budapest University of Technology and Economics},
+  note           = {PhD Thesis, Budapest University of Technology and Economics},
+  language       = {english},
+  pagetotal      = {186},
+  url            = {https://oszkarsemerath.github.io/content/phd-thesis-semerath.pdf},
+  url_pdf        = {https://oszkarsemerath.github.io/content/phd-thesis-semerath.pdf},
+  annote         = {Editorial summary: The dissertation develops logical validation and synthesis techniques for domain-specific languages. Partial graphs, constraint evaluation, and iterative generation provide foundations for the VIATRA Solver approach.}
+}
+
+@misc{marussyPhd2023,
+  author         = {Marussy, Kristóf},
+  title          = {{Abstraction Techniques for the Analysis and Synthesis of Critical Cyber-Physical System Architectures}},
+  year           = {2023},
+  type           = {Thesis},
+  institution    = {Budapest University of Technology and Economics},
+  school         = {Budapest University of Technology and Economics},
+  note           = {PhD Thesis, Budapest University of Technology and Economics},
+  language       = {english},
+  supervisor     = {Majzik, István},
+  url            = {https://marussy.com/phd-thesis.pdf},
+  url_pdf        = {https://marussy.com/phd-thesis.pdf},
+  url_booklet    = {https://marussy.com/phd-thesis-booklet.pdf},
+  annote         = {Editorial summary: Partial-model abstractions support analysis and synthesis of critical architectures. The dissertation connects graph-model generation, multiplicity reasoning, quantitative requirements, and incremental view transformations.}
+}
+
+@misc{freyMsc2023,
+  author         = {Frey, Dominik},
+  title          = {{Complex Event Processing for Design-Space Exploration}},
+  year           = {2023},
+  date           = {2023-12-17},
+  type           = {Thesis},
+  institution    = {Budapest University of Technology and Economics},
+  school         = {Budapest University of Technology and Economics},
+  note           = {Master's Thesis, Budapest University of Technology and Economics},
+  language       = {english},
+  pagetotal      = {78},
+  supervisor     = {Marussy, Kristóf and Vörös, András},
+  url            = {https://dominikfrey.dev/files/theses/msc-thesis-2023-complex-event-processing-dse.pdf},
+  url_pdf        = {https://dominikfrey.dev/files/theses/msc-thesis-2023-complex-event-processing-dse.pdf},
+  annote         = {Editorial summary: Timed monitors and graph-pattern queries guide design-space exploration for context-dependent systems. Implemented in Refinery, the approach generates test sequences and measures behavioral coverage.}
+}
+
+@misc{babikianPhd2024,
+  author         = {Babikian, Aren A.},
+  title          = {{System-Level Testing of Autonomous Vehicles Through Consistent Model Generation with Qualitative Abstractions and Abstract Coverage}},
+  year           = {2024},
+  type           = {Thesis},
+  institution    = {McGill University},
+  school         = {McGill University},
+  note           = {PhD Thesis, McGill University; defended in 2024, catalogued by Érudit in 2025},
+  language       = {english},
+  supervisor     = {Mussbacher, Gunter and Varró, Dániel},
+  url            = {https://www.mcgill.ca/ece/channels/event/phd-defence-aren-babikian-system-level-testing-autonomous-vehicles-through-consistent-model-358492},
+  annote         = {Editorial summary: A scenario-based testing approach uses consistent model generation to assess autonomous vehicles. Multi-level scenario specifications, qualitative coverage, and concrete scenario synthesis support systematic evaluation of safety-critical situations.}
+}

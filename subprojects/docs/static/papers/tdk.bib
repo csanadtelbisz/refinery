@@ -1,4 +1,4 @@
-@misc{telbiszMsc2024,
+@misc{telbiszTdk2024,
     author = {Telbisz, Csan\'ad},
     title = {Efficient Certifiable Verification of Concurrent Software},
     note = {Students' Scientific Conference, Budapest University of Technology and Economics},
@@ -8,4 +8,163 @@
     abstract = {As multi-core processors gain popularity in safety-critical systems, multi-threaded programs are increasingly used in these systems to exploit their full potential. Concurrency introduces a new level of complexity into software verification due to the great number of possible thread interleavings. Achieving satisfying test coverage is even more challenging, and naive verification techniques often become practically infeasible as a result of this complexity.
                 Lately, promising model checking approaches have been developed for the formal verification of concurrent programs that encode the program and the verified property as a Satisfiability Modulo Theories (SMT) problem leaving the reasoning to the strength of SMT solvers. The idea of these methods for concurrent software verification is to ensure that events (variable accesses) of concurrent threads are consistently ordered. Properties are collected that characterize invalid scheduling of concurrent threads and used to exclude invalid program executions. While SMT solvers are optimized in many ways, they remain general purpose tools leaving the room for domain-specific optimization. I propose such an optimization that can find scheduling inconsistencies and strengthen the encoding formula before starting the SMT solving procedure. This way, the solver search space can be greatly reduced and the overall verification performance can be significantly improved.
                 Attaching a certificate of correctness to the result of formal verification and the validation of these verification witnesses have been intensely studied. However, practical applicability of these concepts concerning correctness proofs of concurrent software is still very limited. In this work, I propose a novel way to provide and validate correctness witnesses for concurrent program verification. The approach is based on the core concept of event ordering consistency-based verification. I show how those properties characterizing invalid executions can be used as witnesses for the correctness of the program and how they can be validated.}
+}
+
+% Editorial summaries belong in annote, not in the author abstract field.
+% Source and audit notes: PUBLICATION_SOURCES.md and TDK_SOURCES.md.
+
+@misc{bekoTdk2018,
+  author         = {Bekő, Mária},
+  title          = {{Gráfmintaillesztő rendszerek tesztelése automatikus gráfgenerátorokkal}},
+  year           = {2018},
+  type           = {Report},
+  institution    = {Budapest University of Technology and Economics},
+  note           = {Students' Scientific Conference, Budapest University of Technology and Economics},
+  url            = {https://old.tdk.bme.hu/VIK/SW5/Grafmintailleszto-rendszerek-tesztelese},
+  supervisor     = {Semeráth, Oszkár},
+  url_pdf        = {https://old.tdk.bme.hu/VIK/DownloadPaper/Grafmintailleszto-rendszerek-tesztelese},
+  pagetotal      = {34},
+  award          = {First prize; Morgan Stanley special prize},
+  annote         = {Editorial summary: A graph generator constructs diverse query and database models for testing pattern-matching engines. Neighborhood shapes guide diversity, and results from different query implementations can be compared.},
+  language       = {hungarian}
+}
+
+@misc{ficsorSomorjaiTdk2019,
+  author         = {Somorjai, Balázs and Ficsor, Attila},
+  title          = {{Tesztelrendezések automatikus generálása autonóm járművek szisztematikus ellenőrzéséhez}},
+  year           = {2019},
+  type           = {Report},
+  institution    = {Budapest University of Technology and Economics},
+  note           = {Students' Scientific Conference, Budapest University of Technology and Economics},
+  url            = {https://old.tdk.bme.hu/VIK/intel/Tesztelrendezesek-automatikus-generalasa},
+  supervisor     = {Semeráth, Oszkár},
+  url_pdf        = {https://old.tdk.bme.hu/VIK/DownloadPaper/Tesztelrendezesek-automatikus-generalasa},
+  pagetotal      = {40},
+  award          = {Merit},
+  annote         = {Editorial summary: Traffic tests are generated in two steps: abstract relationships first, followed by numerical positions. Distinct qualitative situations improve scenario diversity and make coverage measurable.},
+  language       = {hungarian}
+}
+
+@misc{juhaszTdk2020,
+  author         = {Juhász, Benedek},
+  title          = {{Struktúra alapú tesztkészletek vizuális elemzése}},
+  year           = {2020},
+  type           = {Report},
+  institution    = {Budapest University of Technology and Economics},
+  note           = {Students' Scientific Conference, Budapest University of Technology and Economics},
+  url            = {https://old.tdk.bme.hu/VIK/Software/Struktura-alapu-tesztkeszletek-vizualis},
+  supervisor     = {Marussy, Kristóf and Semeráth, Oszkár},
+  annote         = {Editorial summary: A browser interface visualizes generated graphs and their structural metrics. Replaying generation steps helps diagnose inconsistent specifications, and the interface makes VIATRA Solver accessible without local solver installation.}
+}
+
+@misc{kilianTdk2020,
+  author         = {Kilián, Csenge},
+  title          = {{Tesztgenerálás relációs mély neurális hálókhoz strukturális fedettségi garanciákkal}},
+  year           = {2020},
+  type           = {Report},
+  institution    = {Budapest University of Technology and Economics},
+  note           = {Students' Scientific Conference, Budapest University of Technology and Economics},
+  url            = {https://old.tdk.bme.hu/VIK/neural2/Tesztgeneralas-relacios-mely-neuralis-halokhoz},
+  supervisor     = {Marussy, Kristóf and Semeráth, Oszkár},
+  annote         = {Editorial summary: Qualitative graph abstractions and numerical reasoning generate inputs for visual relational-reasoning systems. An extension of CLEVR investigates structural test coverage, prediction robustness, and reasoning ability.}
+}
+
+@misc{foldiakTdk2020,
+  author         = {Földiák, Máté},
+  title          = {{Gráf generálás vizsgálata az extra-funkcionális metrikák szerinti architektúra szintézisben}},
+  year           = {2020},
+  type           = {Report},
+  institution    = {Budapest University of Technology and Economics},
+  note           = {Students' Scientific Conference, Budapest University of Technology and Economics},
+  url            = {https://old.tdk.bme.hu/VIK/info2/Graf-generalas-vizsgalata-az-extra},
+  supervisor     = {Marussy, Kristóf},
+  url_pdf        = {https://old.tdk.bme.hu/VIK/DownloadPaper/Graf-generalas-vizsgalata-az-extra},
+  pagetotal      = {38},
+  award          = {Merit},
+  annote         = {Editorial summary: Bounds on reliability, performance, and cost are evaluated on unfinished architecture candidates. These estimates guide graph-based synthesis while retaining completeness and optimality guarantees. PDF title: Megbízható architektúrák szintézise gráfgenerátor segítségével},
+  language       = {hungarian}
+}
+
+@misc{garamiGolejTdk2021,
+  author         = {Garami, Bence and Golej, Márton Marcell},
+  title          = {{Felhőalapú 4-értékű parciális modellező környezet gráftranszformációs környezetekhez}},
+  year           = {2021},
+  type           = {Report},
+  institution    = {Budapest University of Technology and Economics},
+  note           = {Students' Scientific Conference, Budapest University of Technology and Economics},
+  url            = {https://old.tdk.bme.hu/VIK/sw7/Felhoalapu-4erteku-parcialis-modellezo},
+  supervisor     = {Marussy, Kristóf and Semeráth, Oszkár},
+  annote         = {Editorial summary: A cloud modeling environment uses four-valued logic to handle incomplete or inconsistent graphs. A compact representation, transformation-rule language, and execution engine support partial-model management and an ADAS case study.}
+}
+
+@misc{foldiakTdk2022,
+  author         = {Földiák, Máté},
+  title          = {{Gráflekérdezésekkel támogatott architektúra kiértékelés és szintézis szolgáltatásbiztonsági jellemzők alapján}},
+  year           = {2022},
+  type           = {Report},
+  institution    = {Budapest University of Technology and Economics},
+  note           = {Students' Scientific Conference, Budapest University of Technology and Economics},
+  url            = {https://old.tdk.bme.hu/VIK/sw8/Graflekerdezesekkel-tamogatott-architektura},
+  supervisor     = {Marussy, Kristóf},
+  url_pdf        = {https://old.tdk.bme.hu/VIK/DownloadPaper/Graflekerdezesekkel-tamogatott-architektura},
+  pagetotal      = {48},
+  award          = {First prize; IncQuery Labs special prize},
+  annote         = {Editorial summary: Graph queries specify dependability requirements directly on complete and partial architectures. Pattern matching and decision diagrams evaluate these requirements during logic-based architecture synthesis. English PDF title: System Architecture Evaluation and Synthesis for Performability with Graph Queries},
+  language       = {english}
+}
+
+@misc{baksaPappRuszkaTdk2023,
+  author         = {Baksa, Máté and Papp, Inez Anna and Ruszka, Martin},
+  title          = {{Gráf alapú következtetés továbbfejlesztése: Automatikus logika következtetés gráf feldolgozó rendszerekkel}},
+  year           = {2023},
+  type           = {Report},
+  institution    = {Budapest University of Technology and Economics},
+  note           = {Students' Scientific Conference, Budapest University of Technology and Economics},
+  url            = {https://old.tdk.bme.hu/VIK/inform2/d15},
+  supervisor     = {Marussy, Kristóf and Semeráth, Oszkár and Ficsor, Attila},
+  url_pdf        = {https://old.tdk.bme.hu/VIK/DownloadPaper/d15},
+  pagetotal      = {41},
+  award          = {Second prize},
+  annote         = {Editorial summary: Automated derivation of inference rules supports reasoning over graph knowledge bases. Query workloads and Train Benchmark experiments compare graph-processing performance across database sizes and implementations. English PDF title: Enhancing Graph-Based Reasoning: Logical Propagation, Mapping Reasoning, and Performance Testing in Graph Processing Systems},
+  language       = {english}
+}
+
+@misc{radnotiTdk2023,
+  author         = {Radnóti, Zsuzsanna},
+  title          = {{Megosztott állapotterű tervezésitér bejáró algoritmusok}},
+  year           = {2023},
+  type           = {Report},
+  institution    = {Budapest University of Technology and Economics},
+  note           = {Students' Scientific Conference, Budapest University of Technology and Economics},
+  url            = {https://old.tdk.bme.hu/VIK/inteli2/Megosztott-allapotteru-tervezesiter-bejaro},
+  supervisor     = {Marussy, Kristóf and Semeráth, Oszkár},
+  annote         = {Editorial summary: Persistent graph versions and network transfer allow an exploration state space to be shared between executions and machines. The work studies checkpointing, restart, and distributed exploration for graph-generation tasks.}
+}
+
+@misc{szaboTdk2023,
+  author         = {Szabó, Dorottya},
+  title          = {{Parciális Modellek Inkrementális Nézeti Transzformációja}},
+  year           = {2023},
+  type           = {Report},
+  institution    = {Budapest University of Technology and Economics},
+  note           = {Students' Scientific Conference, Budapest University of Technology and Economics},
+  url            = {https://old.tdk.bme.hu/VIK/inform2/Parcialis-Modellek-Inkrementalis-Nezeti},
+  supervisor     = {Marussy, Kristóf and Semeráth, Oszkár},
+  annote         = {Editorial summary: Reactive view transformations visualize four-valued partial graphs and changes during generation. Integration into Refinery exposes progress, contradictions, and possible reasons why a specification has no solution.}
+}
+
+@misc{freyTdk2023,
+  author         = {Frey, Dominik},
+  title          = {{Kontextusfüggő Viselkedések Tesztelése Tervezési Tér Bejárással}},
+  year           = {2023},
+  type           = {Report},
+  institution    = {Budapest University of Technology and Economics},
+  note           = {Students' Scientific Conference, Budapest University of Technology and Economics},
+  url            = {https://old.tdk.bme.hu/VIK/inteli2/Kontextusfuggo-Viselkedesek-Tesztelese},
+  supervisor     = {Vörös, András and Marussy, Kristóf},
+  url_pdf        = {https://old.tdk.bme.hu/VIK/DownloadPaper/Kontextusfuggo-Viselkedesek-Tesztelese},
+  pagetotal      = {62},
+  award          = {Second prize},
+  annote         = {Editorial summary: Timed runtime monitors with graph patterns guide design-space exploration toward behaviorally diverse test sequences. The implementation integrates monitoring and exploration in Refinery and evaluates cyber-physical testing cases. English PDF title: Testing Context Dependent Behaviours with Design-Space Exploration},
+  language       = {english}
 }
