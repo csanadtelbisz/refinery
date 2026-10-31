@@ -41,16 +41,8 @@ The two metadata reproductions explicitly identified below could not be compared
 | `freyCOLREGSEvaluation2025` | [Source](https://dominikfrey.dev/files/papers/issta-2025-assessing-scene-generation-colregs-asv.pdf) | Original abstract; PDF/HTML layout whitespace normalized. |
 | `akelDataSpaces2026` | [Source](https://m2.mtmt.hu/api/publication/37333466) | Original abstract; PDF/HTML layout whitespace normalized. |
 | `akelDataQuality2025` | [Source](https://m2.mtmt.hu/api/publication/36133680) | Original abstract; PDF/HTML layout whitespace normalized. |
-| `bekoTdk2018` | [Source](https://old.tdk.bme.hu/VIK/SW5/Grafmintailleszto-rendszerek-tesztelese) | Exact Hungarian abstract on the official TDK portal; original typos retained. |
-| `ficsorSomorjaiTdk2019` | [Source](https://old.tdk.bme.hu/VIK/intel/Tesztelrendezesek-automatikus-generalasa) | Exact Hungarian abstract on the official TDK portal; original typos retained. |
-| `juhaszTdk2020` | [Source](https://old.tdk.bme.hu/VIK/Software/Struktura-alapu-tesztkeszletek-vizualis) | Exact Hungarian abstract on the official TDK portal; not translated or paraphrased. Original typos retained. |
-| `kilianTdk2020` | [Source](https://old.tdk.bme.hu/VIK/neural2/Tesztgeneralas-relacios-mely-neuralis-halokhoz) | Exact Hungarian abstract on the official TDK portal; original typos retained. |
-| `foldiakTdk2020` | [Source](https://old.tdk.bme.hu/VIK/info2/Graf-generalas-vizsgalata-az-extra) | Exact Hungarian abstract on the official TDK portal; not translated or paraphrased. Original typos retained. |
-| `garamiGolejTdk2021` | [Source](https://old.tdk.bme.hu/VIK/sw7/Felhoalapu-4erteku-parcialis-modellezo) | Exact Hungarian abstract on the official TDK portal; not translated or paraphrased. Original typos retained. |
-| `foldiakTdk2022` | [Source](https://old.tdk.bme.hu/VIK/sw8/Graflekerdezesekkel-tamogatott-architektura) | Exact Hungarian abstract on the official TDK portal; not translated or paraphrased. Original typos retained. |
-| `baksaPappRuszkaTdk2023` | [Source](https://old.tdk.bme.hu/VIK/inform2/d15) | Exact Hungarian abstract on the official TDK portal; not translated or paraphrased. Original typos retained. |
-| `radnotiTdk2023` | [Source](https://old.tdk.bme.hu/VIK/inteli2/Megosztott-allapotteru-tervezesiter-bejaro) | Exact Hungarian abstract on the official TDK portal; not translated or paraphrased. Original typos retained. |
-| `szaboTdk2023` | [Source](https://old.tdk.bme.hu/VIK/inform2/Parcialis-Modellek-Inkrementalis-Nezeti) | Exact Hungarian abstract on the official TDK portal; not translated or paraphrased. Original typos retained. |
+| `foldiakTdk2022` | [Source](https://old.tdk.bme.hu/VIK/DownloadPaper/Graflekerdezesekkel-tamogatott-architektura) | Original English abstract in the report PDF, page ii (PDF page 5). Original grammar retained; layout whitespace and line-wrap hyphenation normalized. |
+| `baksaPappRuszkaTdk2023` | [Source](https://old.tdk.bme.hu/VIK/DownloadPaper/d15) | Original English abstract in the report PDF, page ii (PDF page 6). Original spelling, including “Trainbecnhmark”, and grammar retained; layout whitespace and line-wrap hyphenation normalized. |
 | `freyTdk2023` | [Source](https://dominikfrey.dev/files/theses/tdk-2023-testing-context-dependent-behaviours-dse.pdf) | Original abstract; PDF/HTML layout whitespace normalized. |
 | `freyMsc2023` | [Source](https://dominikfrey.dev/files/theses/msc-thesis-2023-complex-event-processing-dse.pdf) | Original abstract; PDF/HTML layout whitespace normalized. |
 | `babikianPhd2024` | [Source](https://www.mcgill.ca/ece/channels/event/phd-defence-aren-babikian-system-level-testing-autonomous-vehicles-through-consistent-model-358492) | Exact thesis abstract published with the university defence announcement. |
@@ -62,4 +54,4 @@ The two metadata reproductions explicitly identified below could not be compared
 
 The abstract of the 2026 junction-scenarios journal article is taken from the final Springer page rather than its differently worded arXiv preprint. The Acta Cybernetica HTML/author BibTeX abstract loses ligatures and inserts broken words, so the author-deposited PDF supplies that abstract.
 
-TDK portal abstracts remain in Hungarian except `freyTdk2023`, whose report supplies an English abstract. The language of a portal abstract is not used to infer the language of the report. Frey’s source spelling “bevaiours” and the TDK acronym “PTE” are retained as printed.
+All three retained TDK reports supply original English abstracts and English cover titles. Confirmed Hungarian reports are excluded. Five reports without public full text are omitted because no English portal abstract was found; their report language remains unverified. See [TDK_SOURCES.md](TDK_SOURCES.md) for the excluded records and evidence. Frey’s source spelling “bevaiours” and the TDK acronym “PTE”, and Baksa–Papp–Ruszka’s “Trainbecnhmark”, are retained as printed.
