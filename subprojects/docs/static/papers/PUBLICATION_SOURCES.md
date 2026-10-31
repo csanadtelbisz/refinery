@@ -12,12 +12,13 @@ foundations, and applications of this research. A shared author alone is not a
 reason for inclusion. Artifact versions and journal-first presentations are
 linked to their paper rather than counted as additional publications.
 
-The existing citation keys `jot2020` and `icse2024` are retained. The original
-student thesis in the PR is retained as well.
+The existing citation keys `jot2020` and `icse2024` are retained. The example Telbisz thesis and TDK report from the PR are removed because they are unrelated to Refinery.
 
-**Editorial summaries are stored only in `annote`, not in `abstract`.** They are
-paraphrases, not the authors' original abstracts. Original abstracts already
-present in the PR are preserved. DOI and publisher/author links identify the source work.
+**No editorial summaries or `annote` fields remain.** Abstracts are transcribed
+from source records and PDFs; see [ABSTRACT_SOURCES.md](ABSTRACT_SOURCES.md)
+for per-entry provenance, normalization rules and the two missing PhD abstracts.
+The two abstracts available only as bibliographic reproductions are identified
+there for further verification against the publisher PDF.
 Fields such as pagination, ISBN, PDF, and artifact links are included where
 established by the sources below; unavailable values are omitted.
 
@@ -112,12 +113,11 @@ The follow-up audit corrected the following draft metadata:
   misleading abbreviated range. The PDF also establishes ISBN 978-1-4503-9466-6.
 - `burWitness2021`: record the article-number pagination **107:1–107:36**,
   established by the [DBLP journal volume](https://einstein.dagstuhl.de/db/journals/tecs/tecs20.html).
-- Generated summaries are removed from every new `abstract` field and retained
-  as explicitly editorial annotations. They must not be described as author
-  abstracts or copied into that field without a verified original.
+- Removed all generated summaries and `annote` fields. Replaced them with
+  original abstract text and a per-entry source log.
 - TDK languages are recorded only where the downloaded report establishes the
   language. A Hungarian portal description does not establish the PDF language.
-- Alternative PDF titles are annotations, not additions to the citation title.
+- Alternative PDF titles do not alter citation titles; their former annotations are removed.
 - Added `akelDataQuality2025` after finding a BME publisher PDF that explicitly
   identifies Refinery as the implementation. The DOI is printed on page 51;
   the BME MTMT catalogue establishes year, editor, venue, and pages 51–54.
@@ -127,8 +127,9 @@ certify that every source is free of errors. Publication dates conflicting
 between an online release and an assigned issue are documented above, and the
 Babikian defence/catalogue year discrepancy remains explicit.
 
-All three existing BibTeX files belong to the same `publications` PR branch.
-The TDK and thesis additions do not require separate PRs.
+All three BibTeX files are updated together on the
+`publications-bibliography-audit-2026-10-31` branch, based on the publications PR.
+The TDK and thesis additions do not require separate branches.
 
 ## Validation and remaining limitations
 
