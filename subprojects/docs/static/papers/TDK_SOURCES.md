@@ -1,29 +1,33 @@
 # BME TDK collection sources
 
-Checked on 2026-10-26 for the publication page proposed in
+Checked on 2026-10-31 for the publication page proposed in
 [upstream PR #92](https://github.com/graphs4value/refinery/pull/92).
 
-## Scope
+## Scope and language policy
 
-Eleven reports are included in `tdk.bib`. They concern Refinery, its VIATRA
-Solver predecessor, partial-model processing, or closely related graph-generation
-applications. The unrelated Telbisz example report from the original PR is removed.
+Three reports are included in `tdk.bib`. Their full text is verified as English.
+They concern Refinery, its VIATRA Solver predecessor, partial-model processing,
+or closely related graph-generation applications. The unrelated Telbisz example
+report from the original PR is removed.
 
-New entries follow the PR's existing `@misc` / `type = {Report}` convention,
-include the required conference/institution note, retain Hungarian portal
-titles, and use BibTeX's `Family, Given` author form. Alternate titles visible
-on downloaded reports are recorded separately rather than silently replacing
-the portal title. `pagetotal` counts PDF pages, including front matter.
+Titles are transcribed from the English report covers, not translated from the
+Hungarian portal titles. In particular, the Baksa–Papp–Ruszka PDF's embedded
+metadata has a different title; the printed cover supplies the title used here.
+All three abstracts are the original English abstracts in those PDFs, with only
+layout normalization and BibTeX escaping. There are no `annote` fields or generated
+summaries. Per-entry sources are in [ABSTRACT_SOURCES.md](ABSTRACT_SOURCES.md).
 
-**The abstracts are exact source text; no `annote` fields or generated summaries
-remain.** Ten are Hungarian abstracts from the official portal; Frey's English
-abstract is taken from his report PDF. Per-entry sources and transcription notes
-are in [ABSTRACT_SOURCES.md](ABSTRACT_SOURCES.md). `language` is included only
-where the report establishes it; a Hungarian portal abstract may accompany an
-English report.
-PDF links are included only when a download link was found and opened.
-No DOI is invented for an unregistered student report. Supervisor names are
-stored separately from authors.
+As requested, reports confirmed to be written in Hungarian are excluded. For
+reports without public full text, inclusion requires an English abstract on the
+TDK portal. None of the five unverified reports below met that condition in the
+accessible records. Their report language is not inferred from the Hungarian
+abstract, and no English title or abstract has been invented for them.
+
+Entries follow the PR's existing `@misc` / `type = {Report}` convention, include
+the conference/institution note, and use BibTeX's `Family, Given` author form.
+`pagetotal` counts all PDF pages, including front matter. PDF links were opened;
+no DOI is invented for an unregistered student report. Supervisors are separate
+from authors.
 
 ## Search method
 
@@ -36,22 +40,14 @@ to avoid treating the first page as a complete bibliography.
 
 ## Included reports
 
-The year is verified from the archived conference/year listings. Titles,
-authors, supervisors, and topic descriptions come from these paper pages:
+Years are verified from the archived conference/year listings. Authors and
+supervisors are checked against the portal records and report covers.
 
-| Key | Year | Portal record | Relevance |
+| Key | Year | English cover title | Sources |
 | --- | --- | --- | --- |
-| `bekoTdk2018` | 2018 | [Bekő](https://old.tdk.bme.hu/VIK/SW5/Grafmintailleszto-rendszerek-tesztelese) | Diverse graph/query generation for testing graph engines |
-| `ficsorSomorjaiTdk2019` | 2019 | [Somorjai and Ficsor](https://old.tdk.bme.hu/VIK/intel/Tesztelrendezesek-automatikus-generalasa) | Qualitative traffic graphs followed by numeric concretization |
-| `juhaszTdk2020` | 2020 | [Juhász](https://old.tdk.bme.hu/VIK/Software/Struktura-alapu-tesztkeszletek-vizualis) | VIATRA Solver visualization, metrics, and generation replay |
-| `kilianTdk2020` | 2020 | [Kilián](https://old.tdk.bme.hu/VIK/neural2/Tesztgeneralas-relacios-mely-neuralis-halokhoz) | Qualitative graph generation and coverage for relational neural models |
-| `foldiakTdk2020` | 2020 | [Földiák](https://old.tdk.bme.hu/VIK/info2/Graf-generalas-vizsgalata-az-extra) | Quantitative analysis of partial architectures during graph synthesis |
-| `garamiGolejTdk2021` | 2021 | [Garami and Golej](https://old.tdk.bme.hu/VIK/sw7/Felhoalapu-4erteku-parcialis-modellezo) | Cloud-based four-valued partial-model transformations |
-| `foldiakTdk2022` | 2022 | [Földiák](https://old.tdk.bme.hu/VIK/sw8/Graflekerdezesekkel-tamogatott-architektura) | Graph queries and decision diagrams in architecture synthesis |
-| `baksaPappRuszkaTdk2023` | 2023 | [Baksa, Papp, and Ruszka](https://old.tdk.bme.hu/VIK/inform2/d15) | Propagation/inference rules and graph-processing performance |
-| `radnotiTdk2023` | 2023 | [Radnóti](https://old.tdk.bme.hu/VIK/inteli2/Megosztott-allapotteru-tervezesiter-bejaro) | Persistent, shared graph state spaces for exploration |
-| `szaboTdk2023` | 2023 | [Szabó](https://old.tdk.bme.hu/VIK/inform2/Parcialis-Modellek-Inkrementalis-Nezeti) | Explicit Refinery integration for incremental visualization |
-| `freyTdk2023` | 2023 | [Frey](https://old.tdk.bme.hu/VIK/inteli2/Kontextusfuggo-Viselkedesek-Tesztelese) | Explicit Refinery integration for monitoring and guided generation |
+| `foldiakTdk2022` | 2022 | System Architecture Evaluation and Synthesis for Performability with Graph Queries | [Portal](https://old.tdk.bme.hu/VIK/sw8/Graflekerdezesekkel-tamogatott-architektura); [English report](https://old.tdk.bme.hu/VIK/DownloadPaper/Graflekerdezesekkel-tamogatott-architektura) |
+| `baksaPappRuszkaTdk2023` | 2023 | Improving Graph-Based Reasoning: Automated Logic Propagation with Industrial Graph Processing Systems | [Portal](https://old.tdk.bme.hu/VIK/inform2/d15); [English report](https://old.tdk.bme.hu/VIK/DownloadPaper/d15) |
+| `freyTdk2023` | 2023 | Testing Context Dependent Behaviours with Design-Space Exploration | [Portal](https://old.tdk.bme.hu/VIK/inteli2/Kontextusfuggo-Viselkedesek-Tesztelese); [English report](https://dominikfrey.dev/files/theses/tdk-2023-testing-context-dependent-behaviours-dse.pdf) |
 
 Year-filter evidence:
 
@@ -62,6 +58,21 @@ Year-filter evidence:
 - [Marussy 2022](https://old.tdk.bme.hu/Browse/Papers?d=MIT&f=VIK&su=Marussy-Kristof&y=2022)
 - [Marussy 2023](https://old.tdk.bme.hu/Browse/Papers?d=MIT&f=VIK&su=Marussy-Kristof&y=2023)
 - [Semeráth 2023](https://old.tdk.bme.hu/Browse/Papers?d=MIT&f=VIK&su=Semerath-Oszkar2&y=2023)
+
+## Reports excluded by the language policy
+
+These records remain here only as an audit trail; they are not in `tdk.bib`.
+
+| Key | Record | Reason |
+| --- | --- | --- |
+| `bekoTdk2018` | [Portal](https://old.tdk.bme.hu/VIK/SW5/Grafmintailleszto-rendszerek-tesztelese) | Report PDF is written in Hungarian. |
+| `ficsorSomorjaiTdk2019` | [Portal](https://old.tdk.bme.hu/VIK/intel/Tesztelrendezesek-automatikus-generalasa) | Report PDF is written in Hungarian. |
+| `juhaszTdk2020` | [Portal](https://old.tdk.bme.hu/VIK/Software/Struktura-alapu-tesztkeszletek-vizualis) | No public report PDF was found; the accessible portal record has only a Hungarian abstract. No English portal abstract was found; report language is unverified. |
+| `kilianTdk2020` | [Portal](https://old.tdk.bme.hu/VIK/neural2/Tesztgeneralas-relacios-mely-neuralis-halokhoz) | No public report PDF was found; the accessible portal record has only a Hungarian abstract. No English portal abstract was found; report language is unverified. |
+| `foldiakTdk2020` | [Portal](https://old.tdk.bme.hu/VIK/info2/Graf-generalas-vizsgalata-az-extra) | Report PDF is written in Hungarian. |
+| `garamiGolejTdk2021` | [Portal](https://old.tdk.bme.hu/VIK/sw7/Felhoalapu-4erteku-parcialis-modellezo) | No public report PDF was found; the accessible portal record has only a Hungarian abstract. No English portal abstract was found; report language is unverified. |
+| `radnotiTdk2023` | [Portal](https://old.tdk.bme.hu/VIK/inteli2/Megosztott-allapotteru-tervezesiter-bejaro) | No public report PDF was found; the accessible portal record has only a Hungarian abstract. No English portal abstract was found; report language is unverified. |
+| `szaboTdk2023` | [Portal](https://old.tdk.bme.hu/VIK/inform2/Parcialis-Modellek-Inkrementalis-Nezeti) | No public report PDF was found; the accessible portal record has only a Hungarian abstract. No English portal abstract was found; report language is unverified. |
 
 ## Coverage limitations and candidates for follow-up
 
