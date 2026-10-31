@@ -5,11 +5,9 @@ Checked on 2026-10-26 for the publication page proposed in
 
 ## Scope
 
-Eleven reports are added to `tdk.bib`. They concern Refinery, its VIATRA Solver
-predecessor, partial-model processing, or closely related graph-generation
-applications. The report already present in the PR is preserved, including its
-original abstract. Its key is changed from `telbiszMsc2024` to `telbiszTdk2024`
-to avoid colliding with the MSc thesis key when the files are used together.
+Eleven reports are included in `tdk.bib`. They concern Refinery, its VIATRA
+Solver predecessor, partial-model processing, or closely related graph-generation
+applications. The unrelated Telbisz example report from the original PR is removed.
 
 New entries follow the PR's existing `@misc` / `type = {Report}` convention,
 include the required conference/institution note, retain Hungarian portal
@@ -17,10 +15,12 @@ titles, and use BibTeX's `Family, Given` author form. Alternate titles visible
 on downloaded reports are recorded separately rather than silently replacing
 the portal title. `pagetotal` counts PDF pages, including front matter.
 
-**Editorial summaries of portal descriptions are stored in `annote`, not in
-`abstract`.** Original author abstracts are not synthesized. `language` is
-included only where the downloaded report establishes it; a Hungarian portal
-description may accompany an English report.
+**The abstracts are exact source text; no `annote` fields or generated summaries
+remain.** Ten are Hungarian abstracts from the official portal; Frey's English
+abstract is taken from his report PDF. Per-entry sources and transcription notes
+are in [ABSTRACT_SOURCES.md](ABSTRACT_SOURCES.md). `language` is included only
+where the report establishes it; a Hungarian portal abstract may accompany an
+English report.
 PDF links are included only when a download link was found and opened.
 No DOI is invented for an unregistered student report. Supervisor names are
 stored separately from authors.
@@ -68,8 +68,7 @@ Year-filter evidence:
 The current [TDK portal](https://tdk.bme.hu/) returned no usable page text in the
 available reader; its migrated 2024-and-later records could not be enumerated.
 The archived Ficsor supervisor page timed out. Consequently, **this collection
-does not establish exhaustive coverage**, especially for 2024–2026. The existing
-2024 Telbisz entry is retained from the PR, not independently revalidated here.
+does not establish exhaustive coverage**, especially for 2024–2026. The unrelated 2024 Telbisz example is removed.
 
 The following reports were examined but are not added on the strength of a
 shared supervisor alone. They remain candidates if a direct Refinery/VIATRA
@@ -82,8 +81,8 @@ Solver connection can be established from their implementation or full text:
 - [Barta, 2014: abstract test data for autonomous and distributed systems](https://old.tdk.bme.hu/VIK/Informacios/Absztrakt-tesztadat-generalas-autonom-es),
   an earlier Alloy-based approach rather than an identified Refinery report.
 
-The entries belong in the existing `tdk.bib` on the same `publications` PR
-branch as `publications.bib` and `theses.bib`; no separate TDK PR is needed.
+The entries share the `publications-bibliography-audit-2026-10-31` branch
+with `publications.bib` and `theses.bib`; no separate TDK branch is needed.
 
 The new entries were parsed with Pandoc and checked for required fields,
 distinct citation keys, valid URL syntax, and separate author/supervisor roles.
