@@ -13,6 +13,10 @@
   reference strategy.
 
 Both incremental strategies use a journal fed by rule and variable listeners.
+The enum's `create(context, solver)` factory constructs a `SolverStrategy` with
+explicit `synchronize`, `check`, and `reset` interaction points. Each strategy
+owns its solver state and history; the journal owns current sources and dirty
+keys, passing read-only views to the strategy.
 Updates are coalesced until the next check; query changes are flushed before
 cached results are reused. Partial and candidate solvers keep separate journals.
 Model commits and arbitrary restores require no solver checkpoints.

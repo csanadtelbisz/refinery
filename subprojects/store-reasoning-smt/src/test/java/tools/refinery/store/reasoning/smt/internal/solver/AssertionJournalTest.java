@@ -19,6 +19,29 @@ import static org.junit.jupiter.api.Assertions.*;
 class AssertionJournalTest {
 	@ParameterizedTest
 	@EnumSource(SmtSolverStrategy.class)
+	void factoryStrategyReplaysSnapshotAfterReset(SmtSolverStrategy selection) {
+		Z3SolverLoader.loadNativeLibraries();
+		try (var context = new Context()) {
+			var solver = context.mkSolver();
+			var strategy = selection.create(context, solver);
+			var x = context.mkBoolConst("x");
+			var assertions = Map.of("first", new SolverAssertion("first", null, List.of(x)));
+			strategy.synchronize(Map.copyOf(assertions), Set.of("first"));
+			assertEquals(Status.SATISFIABLE, strategy.check());
+			strategy.reset();
+			assertEquals(0, solver.getNumAssertions());
+			strategy.synchronize(Map.copyOf(assertions), Set.of("first"));
+			assertEquals(Status.SATISFIABLE, strategy.check());
+			assertTrue(solver.getModel().eval(x, true).isTrue());
+			strategy.synchronize(Map.of("second", new SolverAssertion("second", null,
+					List.of(context.mkNot(x)))), Set.of("first", "second"));
+			assertEquals(Status.SATISFIABLE, strategy.check());
+			assertTrue(solver.getModel().eval(x, true).isFalse());
+		}
+	}
+
+	@ParameterizedTest
+	@EnumSource(SmtSolverStrategy.class)
 	void randomSnapshotsMatchReset(SmtSolverStrategy strategy) {
 		Z3SolverLoader.loadNativeLibraries();
 		try (var context = new Context()) {
