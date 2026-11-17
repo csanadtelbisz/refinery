@@ -48,9 +48,10 @@ record PreparedRule(
 	public RelationalQuery buildQuery(String name, List<NodeVariable> parameters, List<Literal> moreCommonLiterals,
 									  QueryCompiler queryCompiler, boolean omittedParametersMustExist) {
 		var allCommonLiterals = new ArrayList<>(commonLiterals);
-		for (var parameter : parameterMap.values()) {
-			// Make sure to always existentially quantify all omitted parameters.
-			if (omittedParametersMustExist || !parameters.contains(parameter)) {
+		for (var entry : parameterMap.sequencedEntrySet()) {
+			var parameter = entry.getValue();
+			if (!parametersToCreate.contains(entry.getKey()) &&
+					(omittedParametersMustExist || !parameters.contains(parameter))) {
 				allCommonLiterals.add(ReasoningAdapter.EXISTS_SYMBOL.call(parameter));
 			}
 		}

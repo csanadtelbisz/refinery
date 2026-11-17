@@ -28,6 +28,7 @@ import tools.refinery.store.dse.transition.Rule;
 import tools.refinery.store.dse.transition.actions.ActionLiteral;
 import tools.refinery.store.dse.transition.actions.ActionLiterals;
 import tools.refinery.store.reasoning.ReasoningAdapter;
+import tools.refinery.store.reasoning.actions.PartialActionLiterals;
 import tools.refinery.store.reasoning.literal.*;
 import tools.refinery.store.reasoning.literal.Concreteness;
 import tools.refinery.store.reasoning.representation.PartialFunction;
@@ -279,8 +280,8 @@ public class RuleCompiler {
 		var ruleBuilder = Rule.builder(name)
 				.parameters(nonNewParameters)
 				.clause(precondition.call(CallPolarity.POSITIVE, nonNewParameters));
-		var actionLiterals = new ArrayList<ActionLiteral>();
-		actionLiterals.addAll(preparedRule.getCreateLiterals());
+		var actionLiterals = new ArrayList<>(preparedRule.getCreateLiterals());
+		addNewNodeTypes(preparedRule, actionLiterals);
 		actionLiterals.addAll(preparedRule.getDeleteLiterals());
 		for (var consequent : ruleDefinition.getConsequents()) {
 			var wrappedActions = wrapConsequent(consequent, preparedRule, true);
@@ -292,6 +293,19 @@ public class RuleCompiler {
 		ruleBuilder.action(actionLiterals);
 		var rule = ruleBuilder.build();
 		return new TransitionRule(partialRelation, rule);
+	}
+
+	private void addNewNodeTypes(PreparedRule preparedRule, List<ActionLiteral> actionLiterals) {
+		for (var parameterToCreate : preparedRule.parametersToCreate()) {
+			if (parameterToCreate instanceof Parameter parameter) {
+				var parameterType = parameter.getParameterType();
+			    if (parameter.getParameterType() != null) {
+					var newNode = preparedRule.parameterMap().get(parameterToCreate);
+					var partialType = getPartialRelation(parameterType);
+					actionLiterals.add(PartialActionLiterals.add(partialType, newNode));
+				}
+			}
+		}
 	}
 
 	private PreparedRule prepareRule(RuleDefinition ruleDefinition, boolean needsExplicitMultiObjectParameters) {
@@ -306,12 +320,12 @@ public class RuleCompiler {
 		for (var problemParameter : problemParameters) {
 			var parameter = Variable.of(problemParameter.getName());
 			parameterMap.put(problemParameter, parameter);
+			var binding = builtinAnnotationContext.getParameterBinding(problemParameter);
 			var parameterType = problemParameter.getParameterType();
-			if (parameterType != null) {
+			if (parameterType != null && binding != ParameterBinding.NEW) {
 				var partialType = getPartialRelation(parameterType);
 				commonLiterals.add(partialType.call(parameter));
 			}
-			var binding = builtinAnnotationContext.getParameterBinding(problemParameter);
 			if (needsExplicitMultiObjectParameters) {
 				if (binding == ParameterBinding.SINGLE) {
 					commonLiterals.add(MultiObjectTranslator.MULTI_VIEW.call(CallPolarity.NEGATIVE, parameter));
