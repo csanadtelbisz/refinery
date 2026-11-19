@@ -20,7 +20,6 @@ import tools.refinery.store.map.Version;
 import tools.refinery.store.model.ModelStore;
 import tools.refinery.store.statecoding.StateCoderStoreAdapter;
 
-import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
 public class BestFirstStoreManager {
@@ -38,9 +37,8 @@ public class BestFirstStoreManager {
 
 		objectiveStore = ObjectivePriorityQueueImpl.of(storeAdapter.getObjectives());
 		Consumer<VersionWithObjectiveValue> whenAllActivationsVisited = x -> objectiveStore.remove(x);
-		BiFunction<DecisionRule, Integer, Double> weightProvider = DecisionRule::getWeight;
-		activationStore = new ActivationStoreImpl<>(storeAdapter.getTransformations(), weightProvider,
-				whenAllActivationsVisited);
+		activationStore = new ActivationStoreImpl<>(storeAdapter.getTransformations(), whenAllActivationsVisited,
+				DecisionRule::getWeight);
 		solutionStore = new SolutionStoreImpl(maxNumberOfSolutions);
 		equivalenceClassStore = new FastEquivalenceClassStore(modelStore.getAdapter(StateCoderStoreAdapter.class)) {
 			@Override

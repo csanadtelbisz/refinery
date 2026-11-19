@@ -19,7 +19,7 @@ public interface DesignSpaceExplorationAdapter extends ModelAdapter {
 		return new DesignSpaceExplorationBuilderImpl();
 	}
 
-	List<Transformation> getTransformations();
+	List<DecisionTransformation> getTransformations();
 
 	boolean checkAccept();
 

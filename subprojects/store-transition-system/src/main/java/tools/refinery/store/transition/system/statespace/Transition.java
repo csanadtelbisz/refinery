@@ -9,13 +9,12 @@ import tools.refinery.logic.dnf.Query;
 import tools.refinery.logic.dnf.RelationalQuery;
 import tools.refinery.logic.term.NodeVariable;
 import tools.refinery.logic.term.truthvalue.TruthValue;
+import tools.refinery.store.dse.transition.Transformation;
 import tools.refinery.store.dse.transition.actions.Action;
 import tools.refinery.store.dse.transition.actions.BoundAction;
 import tools.refinery.store.model.Model;
 import tools.refinery.store.query.ModelQueryAdapter;
-import tools.refinery.store.query.OrderedResultSet;
 import tools.refinery.store.query.resultset.OrderedResultSetImpl;
-import tools.refinery.store.query.resultset.ResultSet;
 import tools.refinery.store.reasoning.actions.MergeActionLiteral;
 import tools.refinery.store.reasoning.representation.PartialRelation;
 import tools.refinery.store.tuple.Tuple;
@@ -24,21 +23,15 @@ import java.util.List;
 
 import static tools.refinery.store.reasoning.literal.PartialLiterals.may;
 
-public class Transition {
-	private final String name;
-	private final OrderedResultSet<Boolean> activations;
+public class Transition extends Transformation {
 	private final BoundAction preconditionMergeTrue;
-	private final BoundAction action;
 
 	public Transition(String name, Model model, PartialRelation precondition, Query<Boolean> mayPrecondition,
 					  Action action) {
-		this.name = name;
-
 		var queryEngine = model.getAdapter(ModelQueryAdapter.class);
 		var resultSet = queryEngine.getResultSet(mayPrecondition);
-		this.activations = new OrderedResultSetImpl<>(resultSet);
-
-		this.action = action.bindToModel(model);
+		var activations = new OrderedResultSetImpl<>(resultSet);
+		super(name, activations, action.bindToModel(model));
 
 		var parameters = action.getParameters();
 		var preconditionMergeTrue = new Action(parameters,
@@ -46,33 +39,12 @@ public class Transition {
 		this.preconditionMergeTrue = preconditionMergeTrue.bindToModel(model);
 	}
 
-	@Override
-	public String toString() {
-		return name;
-	}
-
 	public BoundAction getPreconditionAction() {
 		return preconditionMergeTrue;
 	}
 
-	public BoundAction getAction() {
-		return action;
-	}
-
-	public ResultSet<Boolean> getAllActivationsAsResultSet() {
-		return activations;
-	}
-
-	public Tuple getActivation(int index) {
-		return activations.getKey(index);
-	}
-
 	public boolean mergePreconditionTrue(Tuple activation) {
 		return preconditionMergeTrue.fire(activation);
-	}
-
-	public boolean fireAction(Tuple activation) {
-		return action.fire(activation);
 	}
 
 

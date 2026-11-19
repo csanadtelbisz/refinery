@@ -6,31 +6,28 @@
 package tools.refinery.store.dse.transition;
 
 import tools.refinery.store.dse.transition.actions.BoundAction;
-import tools.refinery.store.model.Model;
-import tools.refinery.store.query.ModelQueryAdapter;
 import tools.refinery.store.query.OrderedResultSet;
-import tools.refinery.store.query.resultset.PriorityAgenda;
-import tools.refinery.store.query.resultset.PriorityResultSet;
 import tools.refinery.store.query.resultset.ResultSet;
 import tools.refinery.store.tuple.Tuple;
 
-public class Transformation {
-	private final DecisionRule decisionRule;
+public abstract class Transformation {
+	private final String name;
 	private final OrderedResultSet<Boolean> activations;
 	private final BoundAction action;
 
-	public Transformation(Model model, PriorityAgenda agenda, DecisionRule decisionRule) {
-		this.decisionRule = decisionRule;
-		var definition = decisionRule.rule();
-		var precondition = definition.getPrecondition();
-		var queryEngine = model.getAdapter(ModelQueryAdapter.class);
-		action = definition.createAction(model);
-		var resultSet = queryEngine.getResultSet(precondition);
-		activations = PriorityResultSet.of(resultSet, decisionRule.priority(), agenda);
+	public Transformation(String name, OrderedResultSet<Boolean> activations, BoundAction action) {
+		this.name = name;
+		this.activations = activations;
+		this.action = action;
 	}
 
-	public DecisionRule getDefinition() {
-		return decisionRule;
+	@Override
+	public String toString() {
+		return name;
+	}
+
+	public BoundAction getAction() {
+		return action;
 	}
 
 	public ResultSet<Boolean> getAllActivationsAsResultSet() {
@@ -41,7 +38,7 @@ public class Transformation {
 		return activations.getKey(index);
 	}
 
-	public boolean fireActivation(Tuple activation) {
+	public boolean fireAction(Tuple activation) {
 		return action.fire(activation);
 	}
 }

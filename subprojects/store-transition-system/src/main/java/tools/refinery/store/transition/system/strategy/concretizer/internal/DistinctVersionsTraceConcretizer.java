@@ -144,7 +144,7 @@ public class DistinctVersionsTraceConcretizer extends TraceConcretizer {
 
 	private TraceVersion recreateCurrentStores() {
 		var activationStore = new ActivationStoreImpl<>(explorationStoreAdapter.getTransformations(),
-				DecisionRule::getWeight, actionWhenAllActiovationVisited);
+				actionWhenAllActiovationVisited, DecisionRule::getWeight);
 		activationStoreWorkers.set(currentlyConcretized(),
 				new ActivationStoreWorker<>(activationStore, explorationAdapter.getTransformations()));
 		activationStores.set(currentlyConcretized(), activationStore);

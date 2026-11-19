@@ -6,6 +6,7 @@
 package tools.refinery.store.dse.transition.internal;
 
 import tools.refinery.store.dse.transition.DecisionRule;
+import tools.refinery.store.dse.transition.DecisionTransformation;
 import tools.refinery.store.dse.transition.DesignSpaceExplorationStoreAdapter;
 import tools.refinery.store.dse.transition.Transformation;
 import tools.refinery.store.dse.transition.objectives.Criterion;
@@ -47,8 +48,8 @@ public class DesignSpaceExplorationStoreAdapterImpl implements DesignSpaceExplor
 	@Override
 	public DesignSpaceExplorationAdapterImpl createModelAdapter(Model model) {
 		var agenda = new PriorityAgenda();
-		final List<Transformation> t = this.decisionRules.stream()
-				.map(x -> new Transformation(model, agenda, x))
+		final List<DecisionTransformation> t = this.decisionRules.stream()
+				.map(x -> new DecisionTransformation(model, agenda, x))
 				.toList();
 		final List<CriterionCalculator> a = this.accepts.stream().map(x -> x.createCalculator(model)).toList();
 		final List<CriterionCalculator> e = this.excludes.stream().map(x -> x.createCalculator(model)).toList();

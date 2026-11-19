@@ -5,6 +5,7 @@
  */
 package tools.refinery.store.dse.transition.internal;
 
+import tools.refinery.store.dse.transition.DecisionTransformation;
 import tools.refinery.store.dse.transition.DesignSpaceExplorationAdapter;
 import tools.refinery.store.dse.transition.DesignSpaceExplorationStoreAdapter;
 import tools.refinery.store.dse.transition.ObjectiveValue;
@@ -20,7 +21,7 @@ public class DesignSpaceExplorationAdapterImpl implements DesignSpaceExploration
 	final Model model;
 	final DesignSpaceExplorationStoreAdapter designSpaceExplorationStoreAdapter;
 
-	final List<Transformation> transformations;
+	final List<DecisionTransformation> transformations;
 	final List<CriterionCalculator> accepts;
 	final List<CriterionCalculator> excludes;
 	final List<ObjectiveCalculator> objectives;
@@ -28,7 +29,7 @@ public class DesignSpaceExplorationAdapterImpl implements DesignSpaceExploration
 
 	public DesignSpaceExplorationAdapterImpl(Model model,
 											 DesignSpaceExplorationStoreAdapter designSpaceExplorationStoreAdapter,
-											 List<Transformation> transformations,
+											 List<DecisionTransformation> transformations,
 											 List<CriterionCalculator> accepts,
 											 List<CriterionCalculator> excludes,
 											 List<ObjectiveCalculator> objectives,
@@ -53,7 +54,7 @@ public class DesignSpaceExplorationAdapterImpl implements DesignSpaceExploration
 		return designSpaceExplorationStoreAdapter;
 	}
 
-	public List<Transformation> getTransformations() {
+	public List<DecisionTransformation> getTransformations() {
 		return transformations;
 	}
 

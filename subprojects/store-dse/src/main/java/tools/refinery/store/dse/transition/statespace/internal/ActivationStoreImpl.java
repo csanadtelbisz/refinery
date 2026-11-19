@@ -21,12 +21,17 @@ public class ActivationStoreImpl<R, V> implements ActivationStore<V> {
 	private final Consumer<V> actionWhenAllActivationVisited;
 	private final Map<V, List<ActivationStoreEntry>> versionToActivations;
 
-	public ActivationStoreImpl(List<R> transformations, BiFunction<R, Integer, Double> weightProvider,
-							   Consumer<V> actionWhenAllActivationVisited) {
+	public ActivationStoreImpl(List<R> transformations,
+							   Consumer<V> actionWhenAllActivationVisited,
+							   BiFunction<R,Integer, Double> weightProvider) {
 		this.transformations = transformations;
 		this.weightProvider = weightProvider;
 		this.actionWhenAllActivationVisited = actionWhenAllActivationVisited;
 		versionToActivations = new HashMap<>();
+	}
+
+	public ActivationStoreImpl(List<R> transformations, Consumer<V> actionWhenAllActivationVisited) {
+		this(transformations, actionWhenAllActivationVisited, (_, unvisited) -> unvisited == 0 ? 0.0 : 1.0);
 	}
 
 	public synchronized VisitResult markNewAsVisited(V to, int[] emptyEntrySizes) {
@@ -66,7 +71,6 @@ public class ActivationStoreImpl<R, V> implements ActivationStore<V> {
 		if (successfulVisit) {
 			transformation = transformationIndex;
 			activation = entry.getAndAddActivationAfter(activationIndex);
-
 		} else {
 			transformation = -1;
 			activation = -1;
@@ -114,9 +118,9 @@ public class ActivationStoreImpl<R, V> implements ActivationStore<V> {
 		int numberOfAllUnvisitedActivations = 0;
 		for (int i = 0; i < weights.length; i++) {
 			var entry = entries.get(i);
-			var rule = transformations.get(i);
+			var transformation = transformations.get(i);
 			int unvisited = entry.getNumberOfUnvisitedActivations();
-			double weight = weightProvider.apply(rule, unvisited); // rule.getWeight(unvisited);
+			double weight = weightProvider.apply(transformation, unvisited);
 			weights[i] = weight;
 			totalWeight += weight;
 			numberOfAllUnvisitedActivations += unvisited;

@@ -24,8 +24,18 @@ import tools.refinery.store.tuple.Tuple;
 import tools.refinery.visualization.ModelVisualizerAdapter;
 import tools.refinery.visualization.ModelVisualizerStoreAdapter;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -40,7 +50,7 @@ public class ModelVisualizerAdapterImpl implements ModelVisualizerAdapter {
 	private final boolean renderDesignSpace;
 	private final boolean renderStates;
 	private final StateSpaceStore stateSpaceStore;
-	private final List<Transformation> transformations;
+	private final List<? extends Transformation> transformations;
 	private final List<Transition> transitions;
 
 	@FunctionalInterface
@@ -69,9 +79,6 @@ public class ModelVisualizerAdapterImpl implements ModelVisualizerAdapter {
 			true, "1",
 			false, "0"
 	);
-
-	private record ActivationReference(Version fromVersion, int transformationIndex, int activationIndex) {
-	}
 
 	public ModelVisualizerAdapterImpl(Model model, ModelVisualizerStoreAdapterImpl storeAdapter) {
 		this.model = model;
@@ -334,17 +341,15 @@ public class ModelVisualizerAdapterImpl implements ModelVisualizerAdapter {
 			for (var transition : transitions) {
 				var fromState = this.stateSpaceStore.getStateId(transition.from());
 				var toState = this.stateSpaceStore.getStateId(transition.to());
-				var visitResult = transition.visitResult();
+				var visitResult = transition.activationResult();
 				var ruleName = this.transitions != null ? this.transitions.get(visitResult.transformation()).toString() :
-						this.transformations.get(visitResult.transformation()).getDefinition().rule().getName();
+						this.transformations.get(visitResult.transformation()).toString();
 				final String activationLabel;
-				var activationReference = new ActivationReference(transition.from(), visitResult.transformation(),
-						visitResult.activation());
 				if (!transition.from().equals(restoredVersion)) {
 					model.restore(transition.from());
 					restoredVersion = transition.from();
 				}
-				var activationTuple = resolveActivationTuple(activationReference);
+				var activationTuple = visitResult.activation();
 				activationLabel = activationTuple.toString();
 				var label = ruleName + ", " + activationLabel;
 				transitionsBuilder.append(fromState).append(" -> ").append(toState)
@@ -354,41 +359,6 @@ public class ModelVisualizerAdapterImpl implements ModelVisualizerAdapter {
 			model.restore(originalVersion);
 		}
 		return transitionsBuilder;
-	}
-
-	private Tuple resolveActivationTuple(ActivationReference activationReference) {
-		int transformationIndex = activationReference.transformationIndex();
-		int activationIndex = activationReference.activationIndex();
-
-		Tuple activation;
-		if (this.transitions == null) {
-			if (transformationIndex < 0 || transformationIndex >= this.transformations.size()) {
-				throw new IllegalStateException("Transformation index %d is out of bounds for state %s"
-						.formatted(transformationIndex, activationReference.fromVersion()));
-			}
-			var transformation = this.transformations.get(transformationIndex);
-			int activationCount = transformation.getAllActivationsAsResultSet().size();
-			if (activationIndex < 0 || activationIndex >= activationCount) {
-				throw new IllegalStateException("Activation index %d is out of bounds (size=%d) for transformation %d in state %s"
-						.formatted(activationIndex, activationCount, transformationIndex, activationReference.fromVersion()));
-			}
-			activation = transformation.getActivation(activationIndex);
-		}
-		else {
-			if (transformationIndex < 0 || transformationIndex >= this.transitions.size()) {
-				throw new IllegalStateException("Transition index %d is out of bounds for state %s"
-						.formatted(transformationIndex, activationReference.fromVersion()));
-			}
-			var transition = this.transitions.get(transformationIndex);
-			int activationCount = transition.getAllActivationsAsResultSet().size();
-			if (activationIndex < 0 || activationIndex >= activationCount) {
-				throw new IllegalStateException("Activation index %d is out of bounds (size=%d) for transition %d in state %s"
-						.formatted(activationIndex, activationCount, transformationIndex, activationReference.fromVersion()));
-			}
-			activation = transition.getActivation(activationIndex);
-		}
-
-		return activation;
 	}
 
 	private String buildDesignSpaceDot(boolean renderTransitionsToAlreadyVisitedStates) {

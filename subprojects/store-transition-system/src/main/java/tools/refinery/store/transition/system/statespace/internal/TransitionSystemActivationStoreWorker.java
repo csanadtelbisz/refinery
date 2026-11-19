@@ -6,9 +6,11 @@
 package tools.refinery.store.transition.system.statespace.internal;
 
 import tools.refinery.store.dse.transition.statespace.ActivationStore;
+import tools.refinery.store.dse.transition.statespace.internal.ActivationStoreWorker.ActivationResult;
 import tools.refinery.store.map.Version;
 import tools.refinery.store.transition.system.statespace.FiredTransition;
 import tools.refinery.store.transition.system.statespace.Transition;
+import tools.refinery.store.tuple.Tuple;
 
 import java.util.List;
 import java.util.Random;
@@ -30,7 +32,7 @@ public class TransitionSystemActivationStoreWorker {
 		return result;
 	}
 
-	public ActivationStore.VisitResult selectRandomActivation(Version thisVersion, Random random) {
+	public ActivationResult selectRandomActivation(Version thisVersion, Random random) {
 		var result = store.getRandomAndMarkAsVisited(thisVersion, random);
 		if (result.successfulVisit()) {
 			int selectedTransition = result.transformation();
@@ -40,26 +42,13 @@ public class TransitionSystemActivationStoreWorker {
 			var tuple = transition.getActivation(selectedActivation);
 
 			boolean success = transition.mergePreconditionTrue(tuple);
-			if (success) {
-				return new ActivationStore.VisitResult(
-						true,
-						result.mayHaveMore(),
-						selectedTransition,
-						selectedActivation);
-			} else {
-				return new ActivationStore.VisitResult(
-						false,
-						result.mayHaveMore(),
-						selectedTransition,
-						selectedActivation);
-			}
+			return new ActivationResult(success, result.mayHaveMore(), selectedTransition, tuple);
 		}
-		return result;
+		return new ActivationResult(false, result.mayHaveMore(), result.transformation(), Tuple.of());
 	}
 
-	public FiredTransition fireActivation(int selectedTransition, int selectedActivation) {
+	public FiredTransition fireActivation(int selectedTransition, Tuple activation) {
 		var transition = transitions.get(selectedTransition);
-		var activation = transition.getActivation(selectedActivation);
 		var success = transition.fireAction(activation);
 		if (success) {
 			return new FiredTransition(transition, activation);

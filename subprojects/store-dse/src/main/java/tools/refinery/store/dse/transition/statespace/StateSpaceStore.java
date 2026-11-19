@@ -6,6 +6,7 @@
 package tools.refinery.store.dse.transition.statespace;
 
 import tools.refinery.store.dse.transition.ObjectiveValue;
+import tools.refinery.store.dse.transition.statespace.internal.ActivationStoreWorker.ActivationResult;
 import tools.refinery.store.map.Version;
 
 import java.util.List;
@@ -14,15 +15,15 @@ public interface StateSpaceStore {
 	record State(Version version, int id, int stateCode, boolean isSolution, boolean isError, ObjectiveValue objectiveValue) {
 	}
 
-	record StateTransition(Version from, Version to, int id, ActivationStore.VisitResult visitResult) {
+	record StateTransition(Version from, Version to, int id, ActivationResult activationResult) {
 	}
 
 	default void addState(Version state, int stateCode, boolean isSolution, boolean isError) {
 		addState(state, stateCode, isSolution, isError, null);
 	}
 	void addState(Version state, int stateCode, boolean isSolution, boolean isError, ObjectiveValue objectiveValue);
-	void addTransition(Version from, Version to, ActivationStore.VisitResult visitResult);
-	void addTransition(Version from, int to, ActivationStore.VisitResult visitResult);
+	void addTransition(Version from, Version to, ActivationResult activationResult);
+	void addTransition(Version from, int to, ActivationResult activationResult);
 	List<State> getStates();
 	List<StateTransition> getTransitions();
 	List<StateTransition> getTransitionsToAlreadyVisited();

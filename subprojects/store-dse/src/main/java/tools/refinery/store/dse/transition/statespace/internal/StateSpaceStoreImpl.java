@@ -6,8 +6,8 @@
 package tools.refinery.store.dse.transition.statespace.internal;
 
 import tools.refinery.store.dse.transition.ObjectiveValue;
-import tools.refinery.store.dse.transition.statespace.ActivationStore;
 import tools.refinery.store.dse.transition.statespace.StateSpaceStore;
+import tools.refinery.store.dse.transition.statespace.internal.ActivationStoreWorker.ActivationResult;
 import tools.refinery.store.map.Version;
 
 import java.util.ArrayList;
@@ -25,15 +25,15 @@ public class StateSpaceStoreImpl implements StateSpaceStore {
 	}
 
 	@Override
-	public void addTransition(Version from, Version to, ActivationStore.VisitResult visitResult) {
-		transitions.add(new StateTransition(from, to, transitions.size(), visitResult));
+	public void addTransition(Version from, Version to, ActivationResult activationResult) {
+		transitions.add(new StateTransition(from, to, transitions.size(), activationResult));
 	}
 
 	@Override
-	public void addTransition(Version from, int toStateCode, ActivationStore.VisitResult visitResult) {
+	public void addTransition(Version from, int toStateCode, ActivationResult activationResult) {
 		var toState = states.stream().filter(s -> s.stateCode() == toStateCode).findFirst();
 		if (toState.isPresent()) {
-			transitionsToAlreadyVisited.add(new StateTransition(from, toState.get().version(), transitions.size(), visitResult));
+			transitionsToAlreadyVisited.add(new StateTransition(from, toState.get().version(), transitions.size(), activationResult));
 		} else {
 			throw new IllegalArgumentException("No state with stateCode " + toStateCode + " found.");
 		}

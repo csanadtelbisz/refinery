@@ -7,15 +7,19 @@ package tools.refinery.store.dse.transition.statespace.internal;
 
 import tools.refinery.store.dse.transition.Transformation;
 import tools.refinery.store.dse.transition.statespace.ActivationStore;
+import tools.refinery.store.tuple.Tuple;
 
 import java.util.List;
 import java.util.Random;
 
 public class ActivationStoreWorker<V> {
 	final ActivationStore<V> store;
-	final List<Transformation> transformations;
+	final List<? extends Transformation> transformations;
 
-	public ActivationStoreWorker(ActivationStore<V> store, List<Transformation> transformations) {
+	public record ActivationResult(boolean successfulVisit, boolean mayHaveMore, int transformation, Tuple activation) {
+	}
+
+	public ActivationStoreWorker(ActivationStore<V> store, List<? extends Transformation> transformations) {
 		this.store = store;
 		this.transformations = transformations;
 	}
@@ -28,29 +32,17 @@ public class ActivationStoreWorker<V> {
 		return result;
 	}
 
-	public ActivationStore.VisitResult fireRandomActivation(V thisVersion, Random random) {
+	public ActivationResult fireRandomActivation(V thisVersion, Random random) {
 		var result = store.getRandomAndMarkAsVisited(thisVersion, random);
 		if (result.successfulVisit()) {
 			int selectedTransformation = result.transformation();
-			int selectedActivation = result.activation();
-
 			Transformation transformation = transformations.get(selectedTransformation);
-			var tuple = transformation.getActivation(selectedActivation);
+			int selectedActivation = result.activation();
+			Tuple tuple = transformation.getActivation(selectedActivation);
 
-			boolean success = transformation.fireActivation(tuple);
-			if (success) {
-				return new ActivationStore.VisitResult(
-						true, result.mayHaveMore(),
-						selectedTransformation,
-						selectedActivation);
-			} else {
-				return new ActivationStore.VisitResult(
-						false,
-						result.mayHaveMore(),
-						selectedTransformation,
-						selectedActivation);
-			}
+			boolean success = transformation.fireAction(tuple);
+			return new ActivationResult(success, result.mayHaveMore(), selectedTransformation, tuple);
 		}
-		return result;
+		return new ActivationResult(false, result.mayHaveMore(), result.transformation(), Tuple.of());
 	}
 }

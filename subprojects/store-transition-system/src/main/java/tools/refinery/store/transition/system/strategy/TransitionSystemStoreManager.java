@@ -37,10 +37,8 @@ public class TransitionSystemStoreManager {
 
 		var storeAdapter = modelStore.getAdapter(TransitionSystemStoreAdapter.class);
 		this.objectiveStore = new ObjectivePriorityQueueImpl<>(Comparator.comparingInt(State::depth).reversed());
-		BiFunction<Transition.Builder, Integer, Double> weightProvider = (_, unvisited) -> unvisited == 0 ? 0.0 : 1.0;
 		Consumer<Version> whenAllActivationsVisited = x -> objectiveStore.removeIf(s -> x.equals(s.version()));
-		this.activationStore = new ActivationStoreImpl<>(storeAdapter.getTransitions(), weightProvider,
-				whenAllActivationsVisited);
+		this.activationStore = new ActivationStoreImpl<>(storeAdapter.getTransitions(), whenAllActivationsVisited);
 		this.equivalenceClassStore = new FastEquivalenceClassStore(modelStore.getAdapter(StateCoderStoreAdapter.class)) {
 			@Override
 			protected void delegate(VersionWithObjectiveValue version, int[] emptyActivations, boolean accept) {
