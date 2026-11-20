@@ -8,7 +8,13 @@ package tools.refinery.store.transition.system.strategy.concretizer.internal;
 import tools.refinery.logic.AbstractValue;
 import tools.refinery.logic.dnf.Dnf;
 import tools.refinery.logic.literal.CallLiteral;
+import tools.refinery.logic.literal.ConstantLiteral;
+import tools.refinery.logic.literal.TermLiteral;
+import tools.refinery.logic.term.AbstractCallTerm;
+import tools.refinery.logic.term.AnyTerm;
 import tools.refinery.logic.term.NodeVariable;
+import tools.refinery.logic.term.Term;
+import tools.refinery.logic.rewriter.TermRewriter;
 import tools.refinery.logic.term.Variable;
 import tools.refinery.store.dse.propagation.PropagationAdapter;
 import tools.refinery.store.dse.transition.DecisionRule;
@@ -38,6 +44,9 @@ import tools.refinery.store.query.ModelQueryAdapter;
 import tools.refinery.store.query.resultset.ResultSetListener;
 import tools.refinery.store.reasoning.ReasoningAdapter;
 import tools.refinery.store.reasoning.actions.ComputedMergeActionLiteral;
+import tools.refinery.store.reasoning.actions.ComputedPartialActionLiteral;
+import tools.refinery.store.reasoning.literal.ModalConstraint;
+import tools.refinery.store.reasoning.literal.PartialFunctionCallTerm;
 import tools.refinery.store.reasoning.actions.JoinActionLiteral;
 import tools.refinery.store.reasoning.actions.MergeActionLiteral;
 import tools.refinery.store.reasoning.actions.ModifyActionLiteral;
@@ -450,37 +459,20 @@ public class DistinctVersionsTraceConcretizer extends TraceConcretizer {
 			var inputAllocation = action.getInputAllocation(i);
 			var input = boundAction.getInputTuple(inputAllocation, activation);
 			if (actionLiteral instanceof ComputedActionLiteral<?> computedActionLiteral) {
-				var valueQuery = computedActionLiteral.getValueQuery();
 				var queryInput = input.map(computedActionLiteral.getArgumentMapping());
-				var worklist = new Stack<Entry<Dnf, Tuple>>();
-				worklist.push(new SimpleEntry<>(valueQuery.getDnf(), queryInput));
-				while (!worklist.isEmpty()) {
-					var current = worklist.pop();
-					var symbolicParameters = current.getKey().getSymbolicParameters();
-					var parameters = new ArrayList<Variable>(symbolicParameters.size());
-					for (var symbolicParameter : symbolicParameters) {
-						parameters.add(symbolicParameter.getVariable());
-					}
-
-					for (var clause : current.getKey().getClauses()) {
-						for (var literal : clause.literals()) {
-							if (literal instanceof CallLiteral callLiteral) {
-								var target = callLiteral.getTarget();
-								var callParams = callLiteral.getArguments();
-								var mapping = new int[callParams.size()];
-								for (int j = 0; j < mapping.length; j++) {
-									mapping[j] = parameters.indexOf(callParams.get(j));
-								}
-
-								var arguments = current.getValue().map(mapping);
-								if (target instanceof PartialRelation partialRelation) {
-									symbolsToFix.add(new SimpleEntry<>(partialRelation, arguments));
-								} else if (target instanceof Dnf dnf) {
-									worklist.push(new SimpleEntry<>(dnf, arguments));
-								}
-							}
-						}
-					}
+				var actionBindings = new HashMap<Variable, Integer>();
+				var actionParameters = action.getParameters();
+				for (int j = 0; j < actionParameters.size(); j++) {
+					actionBindings.put(actionParameters.get(j), activation.get(j));
+				}
+				new UsedSymbolCollector(actionBindings, symbolsToFix)
+						.collect(computedActionLiteral.getValueQuery().getDnf(), queryInput);
+				if (actionLiteral instanceof ComputedPartialActionLiteral<?, ?> partialActionLiteral) {
+					var inputVariables = computedActionLiteral.getInputVariables();
+					var written = computedActionLiteral.getParameters().stream()
+							.mapToInt(parameter -> input.get(inputVariables.indexOf(parameter)))
+							.toArray();
+					symbolsToFix.add(new SimpleEntry<>(partialActionLiteral.getPartialSymbol(), Tuple.of(written)));
 				}
 			} else if (actionLiteral instanceof MergeActionLiteral<?, ?> mergeActionLiteral) {
 				var partialSymbol = mergeActionLiteral.getPartialSymbol();
@@ -489,6 +481,106 @@ public class DistinctVersionsTraceConcretizer extends TraceConcretizer {
 				var partialSymbol = joinActionLiteral.getPartialSymbol();
 				symbolsToFix.add(new SimpleEntry<>(partialSymbol, input));
 			}
+		}
+	}
+
+	/**
+	 * Collects the partial symbols a computed action's value query reads. A query sees its own inputs, the rule
+	 * parameters it shares with the action and the node constants of its clauses; every other node variable, and
+	 * every data variable such as the query output, is unbound (-1), and the symbols it is passed to are fixed for
+	 * all nodes in its place, as for abstraction propagations.
+	 */
+	private final class UsedSymbolCollector {
+		private static final int UNBOUND = -1;
+
+		private final Map<Variable, Integer> actionBindings;
+		private final Set<Entry<PartialSymbol<?, ?>, Tuple>> symbolsToFix;
+		private final Set<Entry<Dnf, List<Integer>>> visited = new HashSet<>();
+		private final Stack<Entry<Dnf, int[]>> worklist = new Stack<>();
+
+		private UsedSymbolCollector(Map<Variable, Integer> actionBindings,
+		                            Set<Entry<PartialSymbol<?, ?>, Tuple>> symbolsToFix) {
+			this.actionBindings = actionBindings;
+			this.symbolsToFix = symbolsToFix;
+		}
+
+		void collect(Dnf dnf, Tuple input) {
+			var arguments = new int[dnf.getSymbolicParameters().size()];
+			Arrays.fill(arguments, UNBOUND);
+			for (int i = 0; i < input.getSize(); i++) {
+				arguments[i] = input.get(i);
+			}
+			worklist.push(new SimpleEntry<>(dnf, arguments));
+			while (!worklist.isEmpty()) {
+				var current = worklist.pop();
+				if (visited.add(new SimpleEntry<>(current.getKey(), Arrays.stream(current.getValue()).boxed().toList()))) {
+					visitDnf(current.getKey(), current.getValue());
+				}
+			}
+		}
+
+		private void visitDnf(Dnf dnf, int[] arguments) {
+			var symbolicParameters = dnf.getSymbolicParameters();
+			for (var clause : dnf.getClauses()) {
+				var bindings = new HashMap<>(actionBindings);
+				for (int i = 0; i < symbolicParameters.size(); i++) {
+					var variable = symbolicParameters.get(i).getVariable();
+					if (arguments[i] != UNBOUND) {
+						bindings.put(variable, arguments[i]);
+					} else {
+						bindings.remove(variable);
+					}
+				}
+				for (var literal : clause.literals()) {
+					if (literal instanceof ConstantLiteral constantLiteral) {
+						bindings.put(constantLiteral.getVariable(), constantLiteral.getNodeId());
+					}
+				}
+				for (var literal : clause.literals()) {
+					if (literal instanceof CallLiteral callLiteral) {
+						visitCall(callLiteral.getTarget(), callLiteral.getArguments(), bindings);
+					} else if (literal instanceof TermLiteral<?> termLiteral) {
+						visitTerm(termLiteral.getTerm(), bindings);
+					}
+				}
+			}
+		}
+
+		private void visitCall(Object target, List<? extends Variable> callArguments,
+		                       Map<Variable, Integer> bindings) {
+			while (target instanceof ModalConstraint modalConstraint) {
+				target = modalConstraint.constraint();
+			}
+			var arguments = new int[callArguments.size()];
+			for (int i = 0; i < arguments.length; i++) {
+				var argument = callArguments.get(i);
+				arguments[i] = argument instanceof NodeVariable ? bindings.getOrDefault(argument, UNBOUND) : UNBOUND;
+			}
+			if (target instanceof PartialSymbol<?, ?> partialSymbol) {
+				addAll(partialSymbol, arguments);
+			} else if (target instanceof Dnf dnf) {
+				worklist.push(new SimpleEntry<>(dnf, arguments));
+			}
+		}
+
+		private void visitTerm(AnyTerm term, Map<Variable, Integer> bindings) {
+			if (term instanceof PartialFunctionCallTerm<?, ?> functionCallTerm) {
+				visitCall(functionCallTerm.getPartialFunction(), functionCallTerm.getArguments(), bindings);
+			} else if (term instanceof AbstractCallTerm<?> callTerm) {
+				visitCall(callTerm.getTarget(), callTerm.getArguments(), bindings);
+			}
+			term.rewriteSubTerms(new TermRewriter() {
+				@Override
+				public <T> Term<T> rewriteTerm(Term<T> subTerm) {
+					visitTerm(subTerm, bindings);
+					return subTerm;
+				}
+			});
+		}
+
+		private void addAll(PartialSymbol<?, ?> partialSymbol, int[] arguments) {
+			backtrack(reasoningAdapter.getNodeCount(), arguments.length, 0, arguments, new int[arguments.length],
+					tuple -> symbolsToFix.add(new SimpleEntry<>(partialSymbol, tuple)));
 		}
 	}
 
@@ -779,6 +871,9 @@ public class DistinctVersionsTraceConcretizer extends TraceConcretizer {
 			this.partialSymbol = partialSymbol;
 			partialPartialInterpretation = reasoningAdapter.getPartialInterpretation(Concreteness.PARTIAL, partialSymbol);
 			listener = (key, propagatedValue, originalValue) -> {
+				if (!listening) {
+					return;
+				}
 				var entry = valuePairs.get(key);
 				if (entry == null) {
 					valuePairs.put(key, new SimpleEntry<>(propagatedValue, originalValue));
@@ -788,13 +883,22 @@ public class DistinctVersionsTraceConcretizer extends TraceConcretizer {
 			};
 		}
 
+		// Removing the last listener of a query tears down its Rete network, and adding one builds it again, so
+		// the listener stays registered and is only switched on and off.
+		private boolean registered;
+		private boolean listening;
+
 		void startListening() {
 			valuePairs.clear();
-			partialPartialInterpretation.addListener(listener);
+			if (!registered) {
+				partialPartialInterpretation.addListener(listener);
+				registered = true;
+			}
+			listening = true;
 		}
 
 		void stopListening() {
-			partialPartialInterpretation.removeListener(listener);
+			listening = false;
 		}
 
 		boolean checkAccepted() {
